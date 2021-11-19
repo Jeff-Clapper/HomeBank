@@ -1,10 +1,9 @@
 from flask_app.models.transaction import Transaction
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
+from server import db, client_id, secret
 import requests
 import json
-
-db = 'homebank'
 
 class Bank_Account:
     def __init__(self,data):
@@ -34,8 +33,8 @@ class Bank_Account:
         url = "https://sandbox.plaid.com/transactions/get" # LATER: CREATE A VARIABLE FOR AT LEAST THE FIRST PORTION
 
         payload = json.dumps({
-        "client_id": "615386ab5732020010712561",
-        "secret": "e12ac64123623a95b312ecd75e3675",
+        "client_id": client_id,
+        "secret": secret,
         "access_token": data['access_token'],
         "start_date": "2021-10-01",
         "end_date": "2021-11-13"

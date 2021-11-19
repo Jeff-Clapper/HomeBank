@@ -1,14 +1,13 @@
-from flask.globals import request
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
 import asyncio
+from server import db
 
 from flask_app.models.bank_account import Bank_Account
 from flask_app.models.item import Item
 from flask_app.models.transaction import Transaction
 from flask_app.models.user import User
 
-db = 'homebank'
 
 class Family:
     def __init__(self,data):

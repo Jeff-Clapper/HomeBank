@@ -1,6 +1,6 @@
 from flask.globals import request
 from flask_app.config.mysqlconnection import connectToMySQL
-from server import db, client_id, secret
+from server import db
 
 from datetime import date
 from flask import flash
