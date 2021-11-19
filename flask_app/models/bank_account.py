@@ -3,8 +3,7 @@ from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
 import requests
 import json
-
-db = 'homebank'
+from server import db,client_id, secret
 
 class Bank_Account:
     def __init__(self,data):
@@ -31,21 +30,7 @@ class Bank_Account:
 
     @classmethod
     def initialize_accounts(cls,data):
-        url = "https://sandbox.plaid.com/transactions/get" # LATER: CREATE A VARIABLE FOR AT LEAST THE FIRST PORTION
-
-        payload = json.dumps({
-        "client_id": "615386ab5732020010712561",
-        "secret": "e12ac64123623a95b312ecd75e3675",
-        "access_token": data['access_token'],
-        "start_date": "2021-10-01",
-        "end_date": "2021-11-13"
-        })
-        headers = {
-        'Content-Type': 'application/json'
-        }
-
-        response = requests.request("POST", url, headers=headers, data=payload)
-        response = json.loads(response.text)
+        response = Transaction.get_transactions(data)
         accounts = response['accounts']
         transactions = response['transactions']
         item_id = data['item_id']
@@ -126,13 +111,30 @@ class Bank_Account:
         query = "UPDATE accounts SET available_balance = %(available_balance)s, current_balance = %(current_balance)s, account_limit = %(account_limit)s WHERE plaid_account_id = %(plaid_account_id)s"
 
         for item in data['items']:
-            results = await """PLAID BALANCE API REQUEST HERE""" #MUST UPDATE STILL
+            results = await Bank_Account.get_balance(item)
             for result in results['accounts']:
                 balance_data = {
                     "plaid_account_id" : result['account_id'],
-                    "available_balance" : results['balances']['available'],
-                    "current_balance" : results['balances']['current'],
-                    "account_limit" : results['balances']['limit'],
+                    "available_balance" : result['balances']['available'],
+                    "current_balance" : result['balances']['current'],
+                    "account_limit" : result['balances']['limit'],
                 }
-                return connectToMySQL(db).query_db(query,balance_data)
+                connectToMySQL(db).query_db(query,balance_data)
+        return "success"
 
+    @staticmethod
+    async def get_balance(data):
+        url = "https://sandbox.plaid.com/accounts/balance/get"
+
+        payload = json.dumps({
+        "client_id": client_id,
+        "secret": secret,
+        "access_token": data['access_token']
+        })
+        headers = {
+        'Content-Type': 'application/json'
+        }
+
+        response = requests.request("POST", url, headers=headers, data=payload)
+        response = json.loads(response.text)
+        return response

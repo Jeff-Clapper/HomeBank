@@ -70,6 +70,6 @@ class Item:
 
     @staticmethod
     def get_family_items(data):
-        query = "SELECT families.id AS families_id, items.id AS items_id FROM families LEFT JOIN items ON families.id = items.family_id WHERE families.id = {family_id};"
+        query = "SELECT items.id AS items_id, access_token FROM families LEFT JOIN items ON families.id = items.family_id WHERE families.id = %(family_id)s;"
         results = connectToMySQL(db).query_db(query,data)
-        return results[0]
+        return results

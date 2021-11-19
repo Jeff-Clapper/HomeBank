@@ -2,11 +2,10 @@ from flask.globals import request
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
 import re
+from server import db
 
 name_regex = re.compile(r'^[a-zA-Z]+$')
 email_regex = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-
-db = 'homebank'
 
 class User:
     def __init__(self, data):

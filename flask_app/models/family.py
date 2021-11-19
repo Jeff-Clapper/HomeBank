@@ -2,13 +2,12 @@ from flask.globals import request
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
 import asyncio
+from server import db
 
 from flask_app.models.bank_account import Bank_Account
 from flask_app.models.item import Item
 from flask_app.models.transaction import Transaction
 from flask_app.models.user import User
-
-db = 'homebank'
 
 class Family:
     def __init__(self,data):
@@ -109,10 +108,11 @@ class Family:
     @staticmethod
     async def update_account_info(data):
         items = Item.get_family_items(data)
-        task_1 = asyncio.create_task(Transaction.get_recent_transactions({"items":items})) #MUST CREATE STILL
-        task_2 = asyncio.create_task(Bank_Account.update_account_balances({"items":items})) #STILL HAVE TO CREATE PLAID CALL
-        
-        await task_1
-        await task_2
+        if items[0]['items_id']:
+            task_1 = asyncio.create_task(Transaction.get_recent_transactions({"items":items}))
+            task_2 = asyncio.create_task(Bank_Account.update_account_balances({"items":items}))
+            
+            await task_1
+            await task_2
         
         return "complete"
