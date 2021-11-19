@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet", type='text/css',  href= "{{ url_for('static', filename='css/styles.css') }}">
+    <title>HB Login</title>
+</head>
+<body>
+    <div id="base">
+        <div id = "login-form" class="form form-signin">
+            <h1>Home Bank</h1>
+            <div class="BoH-icon">
+                <img src="{{ url_for('static', filename='images/pig-icon.png') }}" alt="image of pig bank with a house imprinted in the center of it">
+            </div>
+            <div id="error_messages" class=row>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="positive flashed_message"> {{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <form action="/login" method="post">
+                <div class="user_input">
+                    <input type="email" class="form-control" id="email" name='email' placeholder="Email">
+                </div>
+                <div class="user_input">
+                    <input type="password" class="form-control" id="password" name='password' placeholder="Password">
+                </div>
+                <div class="data">
+                    <button type="submit" class="btn btn-secondary">Login</button>
+                </div>
+            </form>
+            <div class="registrationLink">
+                <a href="/family_registration" class="user_registration">Register New User</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet", type='text/css',  href= "{{ url_for('static', filename='css/styles.css') }}">
+    <title>HB Account Registration</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
+    <script type="text/javascript">
+        var user_id = "{{user_id}}"
+    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/flow_link_js.js') }}"></script>
+</head>
+<body>
+    <div id="base">
+        <div id = "registration-form" class="form form-registration">
+            <h1>Home Bank</h1>
+            <div class="BoH-icon">
+                <img src="{{ url_for('static', filename='images/pig-icon.png') }}" alt="image of pig bank with a house imprinted in the center of it">
+            </div>
+            <div id="error_messages" class=row>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="positive flashed_message"> {{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+
+            <button class="btn btn-secondary" id="link-button">Link Account</button>
+            <div class="loginLink">
+                <a href="/user/{{user_id}}/home" class="login">Return to Home Page</a>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>

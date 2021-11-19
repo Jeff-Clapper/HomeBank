@@ -1,0 +1,34 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet", type='text/css',  href= "{{ url_for('static', filename='css/styles.css') }}">
+    <title>HB Account Registration</title>
+</head>
+<body>
+    <div id="base">
+        <div id = "registration-form" class="form form-registration">
+            <h1>Home Bank</h1>
+            <div class="BoH-icon">
+                <img src="{{ url_for('static', filename='images/pig-icon.png') }}" alt="image of pig bank with a house imprinted in the center of it">
+            </div>
+            <form action="/user/{{user_id}}/unllink_account" method="post">
+                <select name='bank_account_id' id="inputState" class="form-control">
+                    <option selected value='#' style="color:lightgray"> Select account to unlink</option>
+                    {% for account in bank_accounts.bank_accounts %}
+                        <option value="{{account.id}}" id="bank_account_id">{{account.name}}</option> 
+                    {% endfor %}
+                </select>
+                <div class="data">
+                    <button type="submit" class="btn btn-secondary">Unlink Account</button>
+                </div>
+            </form>
+            <div class="loginLink">
+                <a href="/user/{{user_id}}/home" class="login">Return to Home Page</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

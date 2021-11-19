@@ -1,0 +1,168 @@
+* {
+	vertical-align: baseline;
+	font-weight: inherit;
+	font-family: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	border: 0 none;
+	outline: 0;
+	padding: 0;
+	margin: 0;
+    /* font-family: 'Lucinda Sans Typewriter','Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
+	}
+
+#base {
+    margin: auto 0px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 100vh;
+    background-color: #eef1f5;
+}
+
+#login-form, #registration-form {
+    background-color: white;
+    padding: 25px;
+    position: fixed; 
+    top: 10%;
+    height: fit-content;
+}
+
+#transaction-base {
+    margin: auto 0px;
+    height: 100vh;
+    background-color: #eef1f5;
+}
+
+.transactions {
+    background-color: white;
+    padding: 25px;
+    width: fit-content;
+}
+
+h1 {
+    font-size: 50pt;
+    font-weight: bold;
+    color: #6e388a;
+}
+
+.user_input {
+    padding: 5px 0px;
+}
+.btn {
+    width: 100%;
+    margin: 5px 0px;
+}
+.btn-secondary {
+    background-color: #6e388a;
+    border-color: #6e388a;
+}
+
+.btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active, .btn-secondary.active, .open>.dropdown-toggle.btn-secondary {
+    color: #fff;
+    background-color: #7952b3;
+    border-color: #7952b3;
+}
+
+.registrationLink, .loginLink {
+    display: flex;
+    justify-content: center;
+}
+.user_registration, .login {
+    color: #6e388a;
+    text-decoration: none;
+}
+.BoH-icon {
+    display: flex;
+    justify-content: center;
+}
+.navbar .navbar-expand-lg .navbar-light .bg-light{
+    background-color: #6e388a;
+}
+.navigation {
+    padding: 0px 10px;
+    display: flex;
+}
+.contents {
+    display: flex;
+    justify-content: space-evenly;
+}
+.smallIcon {
+    padding-right: 15px;
+    height: 40px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+#home_page_body {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    padding:50px;
+}
+
+.module-row{
+    display: flex;
+    flex-direction: column;
+}
+
+.modules {
+    width:33%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.module-links {
+    text-decoration: none;
+    color:black;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dotted lightgray
+
+}
+
+.module-header {
+    color: #6e388a
+}
+
+.module-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.module-items {
+    margin: 0;
+    padding: 0;
+}
+.positive {
+    color: green;
+}
+.negative {
+    color: red;
+}
+.flashed_message {
+	text-align:center
+}

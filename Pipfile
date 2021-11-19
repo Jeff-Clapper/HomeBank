@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+requests = "*"
+plaid-python = "==8.0.0b12"
+python-dotenv = "==0.15.0"
+Flask = "==1.1.2"
+PyMySQL = "*"
+Flask-Bcrypt = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
