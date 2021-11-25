@@ -43,9 +43,10 @@ class Bank_Account:
             Bank_Account.save_account(account_info)
         return Transaction.initializing_transaction(transactions)
 
+    """MAY HAVE CHANGED PLANS FOR THIS AND FORGOT TO DELETE"""
     @classmethod
     def get_family_bank_data(data):
-        family_accounts = Bank_Account.get_account_info(data)
+        family_accounts = Bank_Account.get_family_account_info(data)
 
     
 

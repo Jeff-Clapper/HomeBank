@@ -70,7 +70,7 @@ class Family:
 
 
 
-
+    """THIS MAY BE OBSOLETE"""
     @classmethod
     def get_bank_accounts(cls,data):
         results = Bank_Account.get_account_info(data)
