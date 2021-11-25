@@ -49,16 +49,14 @@
             <div class="modules">
                 <H2 class='module-header'>Balances</H2>
                 <div class='module-body'>
-                    {% for account in bank_accounts.bank_accounts %}
+                    {% for account in user.bank_accounts: %}
                         {% if account.id: %}
                             <a class='module-links' href="/user/{{user.id}}/transactions/{{account.id}}">
                                 <p class='module-account_name'>  {{account.name}}:</p>
-                                {% if account.available_balance > 0: %}
-                                    <p class='module-account_balance positive'>${{account.available_balance}}</p>
-                                {% elif account.available_balance < 0: %}
-                                    <p class='module-account_balance negative'>${{account.available_balance}}</p>
-                                {% else: %}
-                                    <p class='module-account_balance'> {{account.available_balance}}</p>
+                                {% if account.isPos: %}
+                                    <p class='module-account_balance positive'>{{account.funds}}</p>
+                                    {% else: %}
+                                        <p class='module-account_balance negative'>{{account.funds}}</p>
                                 {% endif %}
                             </a>
                         {% else: %}
@@ -70,8 +68,8 @@
             <div class="modules">
                 <H2 class='module-header'>Family Members</H2>
                 <div class='module-body'>
-                    {% for member in bank_accounts.members %}
-                        <p class='module-items'> {{member.first_name}} {{member.last_name}} </p>
+                    {% for member in user.members %}
+                        <p class='module-items'> {{member['member_name']}}</p>
                     {% endfor %}   
                 </div>
             </div>

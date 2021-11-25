@@ -100,30 +100,21 @@ def registerUser():
 
 @app.route('/user/<int:user_id>/home')
 def home(user_id):
-    # try:
-    #     if (session['user_id'] == user_id):
-    #         user = User.get_user({'email' : session['email']})
-    #         bank_accounts = Family.get_bank_accounts({'family_id':session['family_id']})
-    #         # return render_template('home.html', user=user, bank_accounts=bank_accounts)
-    #         return render_template('home.html', user=user, bank_accounts=None)
-    #     else:
-    #         return redirect('/logout')
-    # except:
-    #     return redirect('/logout')
-    data = {
-        "user_id":session['user_id'],
-        'family_id':session['family_id']
-        }
-    # I am making this obsolete. Now I am creating a user object that will include banking data
-    """bank_accounts = Family.get_bank_accounts(data)"""
-    user_profile = Family.get_profile(data)
+    try:
+        if (session['user_id'] == user_id): 
+            data = {
+                "user_id":session['user_id'],
+                'family_id':session['family_id'],
+                "email": session['email']
+                }
 
-    return render_template('home.html', user=user_profile)
-
-
-
-
-
+            user_profile = Family.get_profile(data)
+            return render_template('home.html', user=user_profile)
+        else:
+            return redirect('/logout')
+    except:
+        return redirect('/logout')
+    
 
 """THIS NEEDS A TRY EXCEPT. ONE EXISTS, BUT IT WAS FOR PREVIOUS CODE"""
 @app.route('/user/<int:user_id>/register_bank_account')

@@ -13,10 +13,6 @@ class User:
         self.first_name = data['first_name']
         self.last_name = data['last_name']
         self.email = data['email']
-        # self.password = data['password']
-        # self.created_at = data['created_at']
-        # self.updated_at = data['updated_at']
-        self.family_id = data['family_id']
 
     @classmethod
     def register(cls,data):
@@ -33,7 +29,7 @@ class User:
             "id": user['id'],
             "first_name": user['first_name'],
             "last_name": user['last_name'],
-            "email": user['user']
+            "email": user['email']
         }
         current_user = User(user_data)
         return current_user

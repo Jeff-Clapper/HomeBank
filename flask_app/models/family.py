@@ -31,7 +31,7 @@ class Family:
         
         family_data = {
             "id": family[0]['id'],
-            "family_name": family[0]['name'],
+            "name": family[0]['name'],
             "current_user": current_user,
         }
         profile = Family(family_data)
@@ -46,6 +46,23 @@ class Family:
         
         family_accounts = Bank_Account.get_family_account_info(data)
         for account in family_accounts:
+            if account['available_balance']:
+                funds = float(account['available_balance'])
+            else:
+                funds = float(account['current_balance'])
+
+            if (account['type'] == "credit") or (account['type'] == "loan"):
+                funds *= -1
+            
+            if funds > 0:
+                isPos = True
+            else:
+                isPos = False
+
+            # This assumes that all money is in USD, will need to change if I decide to expand
+            funds = "{:.2f}".format(funds)
+            funds = f"${funds}"
+            
             family_account_info = {
                 "id": account['id'],
                 "name": account['name'],
@@ -56,6 +73,8 @@ class Family:
                 "current_balance": account['current_balance'],
                 "account_limit": account['account_limit'],
                 "iso_currency_code": account['iso_currency_code'],
+                "funds": funds,
+                "isPos": isPos
             }
             profile.bank_accounts.append(Bank_Account(family_account_info))
 
@@ -65,7 +84,7 @@ class Family:
     def get_family_info(data):
         query = 'SELECT families.id, families.name, users.id as member_id, CONCAT(first_name, " " ,last_name) as member_name, users.email as member_email FROM families LEFT JOIN users ON families.id = users.family_id WHERE families.id = %(family_id)s;'
         results = connectToMySQL(db).query_db(query,data)
-        return results[0]
+        return results
 
 
 

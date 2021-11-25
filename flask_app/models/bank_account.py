@@ -15,10 +15,28 @@ class Bank_Account:
         self.mask = data['mask']
         self.available_balance = data['available_balance']
         self.current_balance = data['current_balance']
-        self.account_limit = data['limit']
+        self.account_limit = data['account_limit']
         self.iso_currency_code = data['iso_currency_code']
+        self.funds = data['funds']
+        self.isPos = data['isPos']
         self.transactions = []
 
+    def __str__(self):
+        account = {
+            "id":self.id,
+            "name":self.name,
+            "type":self.type,
+            "subtype":self.subtype,
+            "mask":self.mask,
+            "available_balance":self.available_balance,
+            "current_balance":self.current_balance,
+            "account_limit": self.account_limit,
+            "iso_currency_code": self.iso_currency_code,
+            "funds": self.funds,
+            "isPos": self.isPos
+        }
+        return account
+    
     @classmethod
     def initialize_accounts(cls,data):
 
@@ -36,20 +54,12 @@ class Bank_Account:
                 "subtype": account['subtype'], 
                 "mask": account['mask'], 
                 "available_balance": account['balances']['available'], 
-                "current_balance": account['balances']['current'], 
+                "current_balance": account['balances']['current'],
                 "account_limit": account['balances']['limit'], 
                 "iso_currency_code": account['balances']['iso_currency_code']
             }
             Bank_Account.save_account(account_info)
         return Transaction.initializing_transaction(transactions)
-
-    """MAY HAVE CHANGED PLANS FOR THIS AND FORGOT TO DELETE"""
-    @classmethod
-    def get_family_bank_data(data):
-        family_accounts = Bank_Account.get_family_account_info(data)
-
-    
-
 
     # OLD, MAY BE OBSOLETE
     # @classmethod
@@ -138,4 +148,4 @@ class Bank_Account:
     def get_family_account_info(data):
         query = 'SELECT accounts.* FROM families LEFT JOIN items ON families.id = items.family_id LEFT JOIN accounts ON items.id = accounts.item_id WHERE families.id = %(family_id)s' 
         results = connectToMySQL(db).query_db(query,data)
-        return results[0]
+        return results
