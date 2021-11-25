@@ -1,8 +1,8 @@
-from flask.globals import request
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
 from server import db
 import re
+from server import db
 
 name_regex = re.compile(r'^[a-zA-Z]+$')
 email_regex = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
@@ -13,9 +13,9 @@ class User:
         self.first_name = data['first_name']
         self.last_name = data['last_name']
         self.email = data['email']
-        self.password = data['password']
-        self.created_at = data['created_at']
-        self.updated_at = data['updated_at']
+        # self.password = data['password']
+        # self.created_at = data['created_at']
+        # self.updated_at = data['updated_at']
         self.family_id = data['family_id']
 
     @classmethod
@@ -27,12 +27,26 @@ class User:
         return results
 
     @classmethod
-    def get_user(cls,data):
+    def get_current_user(cls, data):
+        user = User.get_user(data)
+        user_data = {
+            "id": user['id'],
+            "first_name": user['first_name'],
+            "last_name": user['last_name'],
+            "email": user['user']
+        }
+        current_user = User(user_data)
+        return current_user
+    
+    @staticmethod
+    def get_user(data):
         query = 'SELECT * FROM users WHERE email = %(email)s'
         results = connectToMySQL(db).query_db(query,data)
         if len(results) < 1:
             return False
-        return cls(results[0])
+        return results[0]
+
+
 
     @staticmethod
     def password_compare(pw1,pw2):

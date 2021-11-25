@@ -28,19 +28,16 @@ def login():
     if not user:
         flash('Invalid username/password')
         return redirect ('/')
-    if not bcrypt.check_password_hash(user.password,request.form['password']):
+    if not bcrypt.check_password_hash(user['password'],request.form['password']):
         flash('Invalid username/password')
         return redirect ('/')
     
-    session['user_id'] = user.id
-    session['email'] = user.email
-    session['family_id'] = user.family_id
+    session['user_id'] = user['id']
+    session['email'] = user['email']
+    session['family_id'] = user['family_id']
 
-    # CREATE MY ASYNC FUNCTION FOR UPDATING INFO IN FAMILY?
-    # PASS FAMILY_ID
     asyncio.run(Family.update_account_info({"family_id": session['family_id']}))
-
-    return redirect(f'/user/{user.id}/home')
+    return redirect(f'/user/{user["id"]}/home')
 
 @app.route('/family_registration')
 def familyRegister():
@@ -113,8 +110,16 @@ def home(user_id):
     #         return redirect('/logout')
     # except:
     #     return redirect('/logout')
-    user = User.get_user({'email' : session['email']})
-    return render_template('home.html', user=user, bank_accounts=None)
+    data = {
+        "user_id":session['user_id'],
+        'family_id':session['family_id']
+        }
+    # I am making this obsolete. Now I am creating a user object that will include banking data
+    """bank_accounts = Family.get_bank_accounts(data)"""
+    user_profile = Family.get_profile(data)
+
+    return render_template('home.html', user=user_profile)
+
 
 
 
