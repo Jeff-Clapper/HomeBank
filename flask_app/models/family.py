@@ -1,4 +1,3 @@
-from flask.globals import request
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
 import asyncio

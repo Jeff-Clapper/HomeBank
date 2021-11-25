@@ -1,6 +1,7 @@
 from flask_app.models.transaction import Transaction
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
+from server import db, client_id, secret
 import requests
 import json
 from server import db,client_id, secret
@@ -20,6 +21,7 @@ class Bank_Account:
 
     @classmethod
     def initialize_accounts(cls,data):
+
         response = Transaction.get_transactions(data)
         accounts = response['accounts']
         transactions = response['transactions']
