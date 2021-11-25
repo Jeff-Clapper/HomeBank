@@ -3,6 +3,7 @@ from server import db, client_id, secret
 import requests
 import json
 
+
 class Transaction:
     def __init__(self,data):
         self.id = data['id']

@@ -73,3 +73,10 @@ class Item:
         query = "SELECT items.id AS items_id, access_token FROM families LEFT JOIN items ON families.id = items.family_id WHERE families.id = %(family_id)s;"
         results = connectToMySQL(db).query_db(query,data)
         return results
+
+    """CHANGED MY MIND NOT USING THIS AT THIS TIME"""
+    @staticmethod
+    def get_fimaily_item_ids(data):
+        query = "SELECT id FROM items WHERE family_id = %(family_id)s;"
+        results = connectToMySQL(db).query_db(query,data)
+        return results[0]
