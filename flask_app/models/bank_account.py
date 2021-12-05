@@ -1,10 +1,9 @@
 from flask_app.models.transaction import Transaction
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
-from server import db, client_id, secret
+from server import db, client_id, secret, plaid_address
 import requests
 import json
-from server import db,client_id, secret
 
 class Bank_Account:
     def __init__(self,data):
@@ -39,8 +38,7 @@ class Bank_Account:
     
     @classmethod
     def initialize_accounts(cls,data):
-
-        response = Transaction.get_transactions(data)
+        response = Transaction.get_transactions_history(data)
         accounts = response['accounts']
         transactions = response['transactions']
         item_id = data['item_id']
@@ -83,14 +81,6 @@ class Bank_Account:
     #         transact = Transaction(transaction_data)
     #         account.transactions.append(transact)
     #         return account
-
-    """THIS IS OBSOLETE AND NEEDS TO BE CHANGED FOR THE NEW DB OR REMOVED"""
-    @classmethod
-    def get_account_name(cls,data):
-        query = 'SELECT name as bank_account_name FROM bank_accounts WHERE id = %(bank_account_id)s;' 
-        results = connectToMySQL(db).query_db(query,data)
-        return results
-
     
     # This may not be necessary. Check this later
     @classmethod
@@ -129,7 +119,7 @@ class Bank_Account:
 
     @staticmethod
     async def get_balance(data):
-        url = "https://sandbox.plaid.com/accounts/balance/get"
+        url = f"{plaid_address}/accounts/balance/get"
 
         payload = json.dumps({
         "client_id": client_id,
@@ -148,4 +138,6 @@ class Bank_Account:
     def get_family_account_info(data):
         query = 'SELECT accounts.* FROM families LEFT JOIN items ON families.id = items.family_id LEFT JOIN accounts ON items.id = accounts.item_id WHERE families.id = %(family_id)s' 
         results = connectToMySQL(db).query_db(query,data)
+        if not results[0]['id']:
+            return None 
         return results

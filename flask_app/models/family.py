@@ -45,38 +45,39 @@ class Family:
             profile.members.append(member_data)
         
         family_accounts = Bank_Account.get_family_account_info(data)
-        for account in family_accounts:
-            if account['available_balance']:
-                funds = float(account['available_balance'])
-            else:
-                funds = float(account['current_balance'])
+        if family_accounts:
+            for account in family_accounts:
+                if account['available_balance']:
+                    funds = float(account['available_balance'])
+                else:
+                    funds = float(account['current_balance'])
 
-            if (account['type'] == "credit") or (account['type'] == "loan"):
-                funds *= -1
-            
-            if funds > 0:
-                isPos = True
-            else:
-                isPos = False
+                if (account['type'] == "credit") or (account['type'] == "loan"):
+                    funds *= -1
+                
+                if funds > 0:
+                    isPos = True
+                else:
+                    isPos = False
 
-            # This assumes that all money is in USD, will need to change if I decide to expand
-            funds = "{:.2f}".format(funds)
-            funds = f"${funds}"
-            
-            family_account_info = {
-                "id": account['id'],
-                "name": account['name'],
-                "type": account['type'],
-                "subtype": account['subtype'],
-                "mask": account['mask'],
-                "available_balance": account['available_balance'],
-                "current_balance": account['current_balance'],
-                "account_limit": account['account_limit'],
-                "iso_currency_code": account['iso_currency_code'],
-                "funds": funds,
-                "isPos": isPos
-            }
-            profile.bank_accounts.append(Bank_Account(family_account_info))
+                # This assumes that all money is in USD, will need to change if I decide to expand
+                funds = "{:.2f}".format(funds)
+                funds = f"${funds}"
+                
+                family_account_info = {
+                    "id": account['id'],
+                    "name": account['name'],
+                    "type": account['type'],
+                    "subtype": account['subtype'],
+                    "mask": account['mask'],
+                    "available_balance": account['available_balance'],
+                    "current_balance": account['current_balance'],
+                    "account_limit": account['account_limit'],
+                    "iso_currency_code": account['iso_currency_code'],
+                    "funds": funds,
+                    "isPos": isPos
+                }
+                profile.bank_accounts.append(Bank_Account(family_account_info))
 
         return profile
 

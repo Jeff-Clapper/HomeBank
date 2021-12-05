@@ -1,9 +1,8 @@
 import requests
 import json
-import os
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models.bank_account import Bank_Account
-from server import db, client_id, secret
+from server import db, client_id, secret, plaid_address
 
 class Item:
     def __init__(self,data):
@@ -17,7 +16,7 @@ class Item:
     @classmethod
     #This exchanges the public token for the permenant access token that will need to be stored in the DB
     def exchange_pub_tok(cls, data,family_id):
-        url = "https://sandbox.plaid.com/item/public_token/exchange"
+        url = f"{plaid_address}/item/public_token/exchange"
 
         payload = json.dumps({
             "client_id": client_id,
@@ -51,7 +50,7 @@ class Item:
     @staticmethod
     #This create the link token that will be used for the LINK FLOW process
     def create_link_token(user_id):
-        url = "https://sandbox.plaid.com/link/token/create"
+        url = f"{plaid_address}/link/token/create"
 
         payload = json.dumps({
             "client_id": client_id,

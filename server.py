@@ -5,6 +5,7 @@ import os
 db = 'homebank'
 client_id = os.getenv("CLIENT_ID")
 secret = os.getenv("SECRET")
+plaid_address = "https://sandbox.plaid.com"
 
 """Before I delete this section, review the try and except and either add it to my code or create its like in my code"""
 # @app.route("/OLDcreate_link_token", methods=['POST'])

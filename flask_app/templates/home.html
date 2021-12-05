@@ -49,8 +49,8 @@
             <div class="modules">
                 <H2 class='module-header'>Balances</H2>
                 <div class='module-body'>
-                    {% for account in user.bank_accounts: %}
-                        {% if account.id: %}
+                    {% if user.bank_accounts: %}
+                        {% for account in user.bank_accounts: %}
                             <a class='module-links' href="/user/{{user.id}}/transactions/{{account.id}}">
                                 <p class='module-account_name'>  {{account.name}}:</p>
                                 {% if account.isPos: %}
@@ -59,10 +59,10 @@
                                         <p class='module-account_balance negative'>{{account.funds}}</p>
                                 {% endif %}
                             </a>
-                        {% else: %}
-                            <a class='module-links' href="/user/{{user.id}}/register_bank_account">Link Bank Account</a>
-                        {% endif %}
-                    {% endfor %}
+                        {% endfor %}
+                    {% else: %}
+                        <a class='module-links' href="/user/{{user.id}}/register_bank_account">Link Bank Account</a>
+                    {% endif %}
                 </div>
             </div>
             <div class="modules">

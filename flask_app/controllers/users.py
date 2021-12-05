@@ -93,11 +93,6 @@ def registerUser():
         session['email'] = data['email']
         return redirect(f'/user/{user_id}/home') 
 
-
-
-
-
-
 @app.route('/user/<int:user_id>/home')
 def home(user_id):
     try:

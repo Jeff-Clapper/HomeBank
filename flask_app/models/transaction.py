@@ -1,8 +1,8 @@
 from flask_app.config.mysqlconnection import connectToMySQL
-from server import db, client_id, secret
+from server import db, client_id, secret, plaid_address
 import requests
 import json
-
+from datetime import date, timedelta
 
 class Transaction:
     def __init__(self,data):
@@ -82,15 +82,21 @@ class Transaction:
         return connectToMySQL(db).query_db(query,data)
 
     @staticmethod
-    async def async_get_transactions(data):
-        url = "https://sandbox.plaid.com/transactions/get" # LATER: CREATE A VARIABLE FOR AT LEAST THE FIRST PORTION
+    async def async_get_transactions(data):        
+        url = f"{plaid_address}/transactions/get"
+
+        offset = timedelta(-2)
+        start_date = Transaction.get_last_transaction(data)
+        start_date = start_date['date']
+        start_date = start_date+offset
+        end_date = date.today()
 
         payload = json.dumps({
         "client_id": client_id,
         "secret": secret,
         "access_token": data['access_token'],
-        "start_date": "2021-10-01", # THIS NEEDS TO BE ADJUSTED LATER TO ACCOUNT FOR THE DATE
-        "end_date": "2021-11-13" # THIS NEEDS TO BE ADJUSTED LATER TO ACCOUNT FOR THE DATE
+        "start_date": date.strftime(start_date, "%Y-%m-%d"),
+        "end_date": date.strftime(end_date, "%Y-%m-%d")
         })
         headers = {
         'Content-Type': 'application/json'
@@ -101,15 +107,18 @@ class Transaction:
         return response
     
     @staticmethod
-    def get_transactions(data):
-        url = "https://sandbox.plaid.com/transactions/get" # LATER: CREATE A VARIABLE FOR AT LEAST THE FIRST PORTION
+    def get_transactions_history(data):
+        url = f"{plaid_address}/transactions/get"
+
+        end_date = date.today()
+        start_date = end_date.replace(year= end_date.year -1)
 
         payload = json.dumps({
         "client_id": client_id,
         "secret": secret,
         "access_token": data['access_token'],
-        "start_date": "2021-10-01", # THIS NEEDS TO BE ADJUSTED LATER TO ACCOUNT FOR THE DATE
-        "end_date": "2021-11-13" # THIS NEEDS TO BE ADJUSTED LATER TO ACCOUNT FOR THE DATE
+        "start_date": date.strftime(start_date, "%Y-%m-%d"),
+        "end_date": date.strftime(end_date, "%Y-%m-%d")
         })
         headers = {
         'Content-Type': 'application/json'
@@ -125,34 +134,8 @@ class Transaction:
         results = connectToMySQL(db).query_db(query,data)
         return results
 
-
-
-"""Old code for pagination, May not need anymore """
-# def days_in_month(year,month):
-#     thirty_day = [4,6,9,11]
-#     if (month == 2) and (year % 4 == 0):
-#         return 29
-#     elif month ==2:
-#         return 28
-#     elif month in thirty_day:
-#         return 30
-#     else:
-#         return 31
-
-"""Old code for pagination, May not need anymore """
-# def two_months_ago(today):
-#     year = int(today.year)
-#     month = int(today.month)
-#     day = int(today.day)
-#     if month <= 2:
-#         year -= 1
-#         month += 10
-#     else:
-#         month -= 2
-#     daysInMonth = days_in_month(year,month)
-#     if daysInMonth < day:
-#         day = daysInMonth
-#     month = str(month).zfill(2)
-#     day = str(day).zfill(2)
-#     twoMonthsAgo = (f'{year}-{month}-{day}')
-#     return date.fromisoformat(twoMonthsAgo)
+    @staticmethod
+    def get_last_transaction(data):
+        query = "SELECT transactions.date FROM items LEFT JOIN accounts ON items.id = accounts.item_id LEFT JOIN transactions ON accounts.id = transactions.account_id WHERE items.id = %(items_id)s ORDER BY transactions.date desc LIMIT 1;"
+        result = connectToMySQL(db).query_db(query,data)
+        return result[0]
