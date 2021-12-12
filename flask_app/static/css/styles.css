@@ -166,3 +166,21 @@ h1 {
 .flashed_message {
 	text-align:center
 }
+#transactions-account-date-filter {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: baseline;
+}
+.accounts, #start_date, #end_date {
+    text-align: center;
+    align-content: center;
+    border: solid lightgray 2px;
+    margin:0px 15px;
+}
+#account_selector {
+	text-align:center
+}
+#transaction-head {
+	width:100%;
+	text-align:center;
+}

@@ -1,6 +1,7 @@
 from flask_app import app
 from flask import json, render_template, redirect, request, flash, session, jsonify, url_for
 import asyncio
+from datetime import datetime, date, timedelta
 
 from flask_app.models.user import User
 from flask_app.models.bank_account import Bank_Account
@@ -102,16 +103,22 @@ def home(user_id):
                 'family_id':session['family_id'],
                 "email": session['email']
                 }
-
             user_profile = Family.get_profile(data)
+            family_accounts = []
+            for account in user_profile.bank_accounts:
+                family_accounts.append(
+                    {"account_name": account.name, 
+                    "account_id":account.id
+                })
+            print(family_accounts)
+            session['family_accounts'] = family_accounts
             return render_template('home.html', user=user_profile)
         else:
             return redirect('/logout')
     except:
         return redirect('/logout')
-    
 
-"""THIS NEEDS A TRY EXCEPT. ONE EXISTS, BUT IT WAS FOR PREVIOUS CODE"""
+"""THIS NEEDS A TRY EXCEPT. ONE EXSISTS, BUT IT WAS FOR PREVIOUS CODE"""
 @app.route('/user/<int:user_id>/register_bank_account')
 # def register_bank_account(user_id):
 #     try:
@@ -138,28 +145,62 @@ def public_token_exchange():
     return json.dumps({'success':True}), 200, {'ContentType':'application/json'}
 
 
-@app.route('/user/<int:user_id>/transactions/<string:bank_account_id>')
-def transaction(user_id, bank_account_id):
-    try:
-        if (session['user_id']==user_id) and (Family.does_family_own_account({'family_id': session['family_id']},bank_account_id)==True):
-            user = User.get_user({'email' : session['email']})
-            transacts = Transaction.get_account_transactions(bank_account_id)
-            if not transacts:
-                transacts = Bank_Account.get_account_name({'bank_account_id':bank_account_id})
-                noTransactions = True
-                return render_template('transactions.html',user=user,transactions=transacts)
-            for transact in transacts:
-                transact['date'] = str(transact['date'].strftime('%m/%d/%y'))
-                if transact['pending'] == 0:
-                    transact['pending'] = 'processed'
-                else:
-                    transact['pending'] = 'pending'
-            noTransactions = False
-            return render_template('transactions.html',user=user,transactions=transacts, noTransactions=noTransactions)
+@app.route('/user/<int:user_id>/transactions')
+def transactions(user_id):
+    # try:
+    #     if (session['user_id']==user_id) and (Family.does_family_own_account({'family_id': session['family_id']},bank_account_id)==True):
+    #         user = User.get_user({'email' : session['email']})
+    #         transacts = Transaction.get_account_transactions(bank_account_id)
+    #         if not transacts:
+    #             transacts = Bank_Account.get_account_name({'bank_account_id':bank_account_id})
+    #             noTransactions = True
+    #             return render_template('transactions.html',user=user,transactions=transacts)
+    #         for transact in transacts:
+    #             transact['date'] = str(transact['date'].strftime('%m/%d/%y'))
+    #             if transact['pending'] == 0:
+    #                 transact['pending'] = 'processed'
+    #             else:
+    #                 transact['pending'] = 'pending'
+    #         noTransactions = False
+    #         return render_template('transactions.html',user=user,transactions=transacts, noTransactions=noTransactions)
+    #     else:
+    #         return redirect('/logout')
+    # except:
+    #     return redirect('/')
+    if session['user_id']==user_id:
+        user = User.get_user({'email' : session['email']})
+        accounts = session['family_accounts'] 
+        return render_template('transactions.html',user=user,accounts=accounts)
+
+@app.route('/user/<int:user_id>/get_transactions',methods=['POST'])
+def get_transactions(user_id):
+    if user_id == session['user_id']:
+        end_date = request.form["end_date"]
+        if end_date:
+            end_date = datetime.strptime(end_date,"%m/%d/%Y")
         else:
-            return redirect('/logout')
-    except:
-        return redirect('/')
+            end_date = date.today()
+        
+        start_date = request.form["start_date"]
+        if start_date:
+            start_date = datetime.strptime(start_date,"%m/%d/%Y")
+        else:
+            offset = timedelta(30)
+            start_date = end_date-offset
+
+        data = {
+            "family_id": request.form["family_id"],
+            "account_id":  request.form["account_id"],
+            "start_date": start_date,
+            "end_date": end_date
+        }
+        print("data: ",data)
+
+        family_transactions = Transaction.get_account_transactions(data)
+        return jsonify(family_transactions)
+        return json.dumps({'success':True}), 200, {'ContentType':'application/json'} # might possibly need this
+    else:
+        return redirect('/logout')
 
 """THIS NEEDS TO BE UPDATED TO REMOVE ITEM PER PLAID API ENDPOINT"""
 @app.route('/user/<int:user_id>/remove_bank_account')

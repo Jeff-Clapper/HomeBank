@@ -139,3 +139,12 @@ class Transaction:
         query = "SELECT transactions.date FROM items LEFT JOIN accounts ON items.id = accounts.item_id LEFT JOIN transactions ON accounts.id = transactions.account_id WHERE items.id = %(items_id)s ORDER BY transactions.date desc LIMIT 1;"
         result = connectToMySQL(db).query_db(query,data)
         return result[0]
+
+    @staticmethod
+    def get_account_transactions(data):
+        if data['account_id'] != "all":
+            query = "SELECT transactions.* FROM families LEFT JOIN items ON families.id = items.family_id LEFT JOIN accounts ON items.id = accounts.item_id LEFT JOIN transactions ON accounts.id = transactions.account_id WHERE families.id = %(family_id)s AND accounts.id = %(account_id)s AND transactions.date BETWEEN %(start_date)s AND %(end_date)s ORDER BY transactions.date desc;"
+        else:
+            query = "SELECT transactions.* FROM families LEFT JOIN items ON families.id = items.family_id LEFT JOIN accounts ON items.id = accounts.item_id LEFT JOIN transactions ON accounts.id = transactions.account_id WHERE families.id = %(family_id)s AND transactions.date BETWEEN %(start_date)s AND %(end_date)s ORDER BY transactions.date desc;"
+        return connectToMySQL(db).query_db(query,data)
+
