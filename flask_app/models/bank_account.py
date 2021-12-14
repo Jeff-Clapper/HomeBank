@@ -141,3 +141,9 @@ class Bank_Account:
         if not results[0]['id']:
             return None 
         return results
+
+    @staticmethod
+    def get_account_name(data):
+        query = 'SELECT name FROM accounts WHERE id = %(account_id)s'
+        result = connectToMySQL(db).query_db(query,data)
+        return result[0]

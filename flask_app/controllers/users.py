@@ -110,7 +110,7 @@ def home(user_id):
                     {"account_name": account.name, 
                     "account_id":account.id
                 })
-            print(family_accounts)
+
             session['family_accounts'] = family_accounts
             return render_template('home.html', user=user_profile)
         else:
@@ -197,30 +197,44 @@ def get_transactions(user_id):
         print("data: ",data)
 
         family_transactions = Transaction.get_account_transactions(data)
+        
+        for transaction in family_transactions:
+            transaction['date'] = datetime.strftime(transaction["date"],"%m/%d/%Y")
+            if transaction['pending'] == 0:
+                transaction['pending'] = "Completed"
+            elif transaction['pending'] == 1:
+                transaction['pending'] = "Pending"
+            transaction['iso_currency_code'] = "$"
+            transaction['account_name'] = Bank_Account.get_account_name({"account_id": transaction['account_id']})
+            transaction['account_name'] = transaction['account_name']['name']
+            transaction['amount'] = float(transaction['amount'])
+            transaction['amount'] = "{:.2f}".format(transaction['amount'])
+
         return jsonify(family_transactions)
         return json.dumps({'success':True}), 200, {'ContentType':'application/json'} # might possibly need this
     else:
         return redirect('/logout')
 
 """THIS NEEDS TO BE UPDATED TO REMOVE ITEM PER PLAID API ENDPOINT"""
-@app.route('/user/<int:user_id>/remove_bank_account')
-def unlink_bank_account(user_id):
-    try:
-        if (session['user_id'] == user_id):
-            bank_accounts = Family.get_bank_accounts({'family_id':session['family_id']})
-            return render_template('unlink_bank_account.html',user_id=user_id,bank_accounts=bank_accounts)
-        else:
-            return redirect('/logout')
-    except:
-        return redirect('/logout')
+# @app.route('/user/<int:user_id>/remove_bank_account')
+# def unlink_bank_account(user_id):
+#     try:
+#         if (session['user_id'] == user_id):
+#             bank_accounts = Family.get_bank_accounts({'family_id':session['family_id']})
+#             return render_template('unlink_bank_account.html',user_id=user_id,bank_accounts=bank_accounts)
+#         else:
+#             return redirect('/logout')
+#     except:
+#         return redirect('/logout')
 
-@app.route('/user/<int:user_id>/unlink_account', methods=['POST'])
-def unlink_account(user_id):
-    data = {
-        'bank_account_id':request.form['bank_account_id']
-    }
-    Bank_Account.unlinkAccount(data)
-    return redirect(f'/user/{user_id}/home')
+"""This may be used as the remove from above"""
+# @app.route('/user/<int:user_id>/unlink_account', methods=['POST'])
+# def unlink_account(user_id):
+#     data = {
+#         'bank_account_id':request.form['bank_account_id']
+#     }
+#     Bank_Account.unlinkAccount(data)
+#     return redirect(f'/user/{user_id}/home')
 
 @app.route('/logout')
 def logout():
