@@ -32,10 +32,10 @@ function populate_transaction(){
         if(results.length > 0){
             for(var ind = 0; ind < results.length; ind++){
                 if(results[ind].amount < 0){
-                    $(".transaction_body").append(`<tr><td class="trans_id">${results[ind].id}</td><td class="trans_date">${results[ind].date}</td><td class='trans_name'>${results[ind].name}</td><td class="trans_amount negative">$${results[ind].amount}</td><td class='trans_category'>${results[ind].category}</td><td class='status'>${results[ind].pending}</td><td class='account_name'>${results[ind].account_name}</td></tr>`);    
+                    $(".transaction_body").append(`<tr><td class="trans_id" hidden>${results[ind].id}</td><td class="trans_date">${results[ind].date}</td><td class='trans_name'>${results[ind].name}</td><td class="trans_amount negative">$${results[ind].amount}</td><td class='trans_category'>${results[ind].category}</td><td class='status'>${results[ind].pending}</td><td class='account_name'>${results[ind].account_name}</td></tr>`);    
                 }
                 else{
-                    $(".transaction_body").append(`<tr><td class="trans_id">${results[ind].id}</td><td class="trans_date">${results[ind].date}</td><td class='trans_name'>${results[ind].name}</td><td class="trans_amount positive">$${results[ind].amount}</td><td class='trans_category'>${results[ind].category}</td><td class='status'>${results[ind].pending}</td><td class='account_name'>${results[ind].account_name}</td></tr>`);    
+                    $(".transaction_body").append(`<tr><td class="trans_id" hidden>${results[ind].id}</td><td class="trans_date">${results[ind].date}</td><td class='trans_name'>${results[ind].name}</td><td class="trans_amount positive">$${results[ind].amount}</td><td class='trans_category'>${results[ind].category}</td><td class='status'>${results[ind].pending}</td><td class='account_name'>${results[ind].account_name}</td></tr>`);    
                 }
             }
         }

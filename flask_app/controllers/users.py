@@ -207,6 +207,7 @@ def get_transactions(user_id):
             transaction['iso_currency_code'] = "$"
             transaction['account_name'] = Bank_Account.get_account_name({"account_id": transaction['account_id']})
             transaction['account_name'] = transaction['account_name']['name']
+            transaction['amount'] *= -1
             transaction['amount'] = float(transaction['amount'])
             transaction['amount'] = "{:.2f}".format(transaction['amount'])
 

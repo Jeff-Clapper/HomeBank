@@ -10,14 +10,14 @@
 	margin: 0;
     /* font-family: 'Lucinda Sans Typewriter','Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
 	}
-
+body {
+    background-color: #eef1f5;
+}
 #base {
     margin: auto 0px;
     display: flex;
     justify-content: center;
     align-content: center;
-    height: 100vh;
-    background-color: #eef1f5;
 }
 
 #login-form, #registration-form {
@@ -26,6 +26,8 @@
     position: fixed; 
     top: 10%;
     height: fit-content;
+    border-radius: 10px;
+    box-shadow: lightgray 3px 3px;
 }
 
 #transaction-base {
@@ -38,6 +40,8 @@
     background-color: white;
     padding: 25px;
     width: fit-content;
+    border-radius: 10px;
+    box-shadow: lightgray 3px 3px;
 }
 
 h1 {
@@ -132,7 +136,8 @@ h1 {
     width:33%;
     background-color: white;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 10px;
+    box-shadow: lightgray 3px 3px;
 }
 
 .module-links {
@@ -183,4 +188,8 @@ h1 {
 #transaction-head {
 	width:100%;
 	text-align:center;
+}
+.transactions-table {
+    border: solid lightgray 3px;
+    margin: 15px 0px;
 }
