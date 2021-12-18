@@ -8,6 +8,8 @@ from flask_app.models.bank_account import Bank_Account
 from flask_app.models.family import Family
 from flask_app.models.transaction import Transaction
 from flask_app.models.item import Item
+from flask_app.models.major_category_1 import Major_Category_1 
+from flask_app.models.major_category_2 import Major_Category_2
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
@@ -15,6 +17,7 @@ bcrypt = Bcrypt(app)
 @app.route('/')
 def login_page():
     return render_template('login.html')
+
 
 @app.route('/login',methods=['POST'])
 def login():
@@ -40,9 +43,11 @@ def login():
     asyncio.run(Family.update_account_info({"family_id": session['family_id']}))
     return redirect(f'/user/{user["id"]}/home')
 
+
 @app.route('/family_registration')
 def familyRegister():
     return render_template('family_registration.html')
+
 
 @app.route('/register_family',methods=['POST'])
 def registerFamily():
@@ -54,6 +59,7 @@ def registerFamily():
         results = Family.register_Family(data)
         session['family_id'] = results[0]['id']
         return redirect('/family_registration/user_registration') 
+
 
 @app.route('/family_registration/user_registration')
 def userRegister():
@@ -68,6 +74,7 @@ def userRegister():
                 return render_template('user_registration.html',currentlyLoggedIn=currentlyLoggedIn)
     except:
         return redirect('/family_registration')
+
 
 """DOES THIS NEED A TRY AND EXCEPT? IF OTHERS CAN PASS THEIR OWN DATA, THEY COULD REGISTER AN ACCOUNT?"""
 @app.route('/register_user',methods=['POST'] )
@@ -94,6 +101,7 @@ def registerUser():
         session['email'] = data['email']
         return redirect(f'/user/{user_id}/home') 
 
+
 @app.route('/user/<int:user_id>/home')
 def home(user_id):
     try:
@@ -118,6 +126,7 @@ def home(user_id):
     except:
         return redirect('/logout')
 
+
 """THIS NEEDS A TRY EXCEPT. ONE EXSISTS, BUT IT WAS FOR PREVIOUS CODE"""
 @app.route('/user/<int:user_id>/register_bank_account')
 # def register_bank_account(user_id):
@@ -131,11 +140,13 @@ def home(user_id):
 def register_bank_account(user_id):
     return render_template('bank_account_registration.html',user_id=user_id)
 
+
 @app.route("/create_link_token", methods=['POST'])
 def create_link_token():
     user_id = session['user_id']
     results = Item.create_link_token(user_id)
     return jsonify(results)
+
 
 @app.route('/exchanging_public_token', methods=['POST'])
 def public_token_exchange():
@@ -171,6 +182,7 @@ def transactions(user_id):
         user = User.get_user({'email' : session['email']})
         accounts = session['family_accounts'] 
         return render_template('transactions.html',user=user,accounts=accounts)
+
 
 @app.route('/user/<int:user_id>/get_transactions',methods=['POST'])
 def get_transactions(user_id):
@@ -216,6 +228,7 @@ def get_transactions(user_id):
     else:
         return redirect('/logout')
 
+
 """THIS NEEDS TO BE UPDATED TO REMOVE ITEM PER PLAID API ENDPOINT"""
 # @app.route('/user/<int:user_id>/remove_bank_account')
 # def unlink_bank_account(user_id):
@@ -228,6 +241,7 @@ def get_transactions(user_id):
 #     except:
 #         return redirect('/logout')
 
+
 """This may be used as the remove from above"""
 # @app.route('/user/<int:user_id>/unlink_account', methods=['POST'])
 # def unlink_account(user_id):
@@ -237,10 +251,12 @@ def get_transactions(user_id):
 #     Bank_Account.unlinkAccount(data)
 #     return redirect(f'/user/{user_id}/home')
 
+
 @app.route('/logout')
 def logout():
     session.clear()
     return redirect('/') 
+
 
 @app.route('/family_back')
 def familyBack():
@@ -248,6 +264,7 @@ def familyBack():
     Family.remove_Family(data)
     session.clear()
     return redirect('/family_registration')
+
 
 @app.route('/login_back')
 def loginBack():

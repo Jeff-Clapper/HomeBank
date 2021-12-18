@@ -87,9 +87,6 @@ class Family:
         results = connectToMySQL(db).query_db(query,data)
         return results
 
-
-
-
     @classmethod
     def get_bank_accounts(cls,data):
         results = Bank_Account.get_account_info(data)

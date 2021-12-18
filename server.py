@@ -1,11 +1,14 @@
 from flask_app import app
-from flask_app.controllers import users 
+from flask_app.controllers import users
+from flask_app.models.major_category_1 import Major_Category_1 
 import os
 
 db = 'homebank'
 client_id = os.getenv("CLIENT_ID")
 secret = os.getenv("SECRET")
 plaid_address = "https://sandbox.plaid.com"
+
+Major_Category_1.update_categories()
 
 """Before I delete this section, review the try and except and either add it to my code or create its like in my code"""
 # @app.route("/OLDcreate_link_token", methods=['POST'])
