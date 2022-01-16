@@ -1,4 +1,5 @@
 from flask_app.config.mysqlconnection import connectToMySQL
+from flask_app.models.major_category_1 import Major_Category_1
 from server import db, client_id, secret, plaid_address
 import requests
 import json
@@ -22,12 +23,26 @@ class Transaction:
 
     @classmethod
     def initializing_transaction(cls, transactions):
+        print("starting transaction initialization")
         for transaction in transactions:
             account_id = Transaction.get_account_id({"account_id": transaction['account_id']})
             plaid_transaction_id = transaction['transaction_id']
             
             if Transaction.verify_tranaction({'plaid_transaction_id':plaid_transaction_id}):
                 continue
+
+            if len(transaction['category'])>1:
+                category_data = {
+                    "major_cat": transaction['category'][0],
+                    "minor_cat": transaction['category'][1]
+                }
+            else:
+                category_data = {
+                    "major_cat": transaction['category'][0],
+                    "minor_cat": "None"
+                }
+
+            category_1_id = Major_Category_1.get_transaction_category_1_id(category_data)
 
             transaction_info = {
                 "account_id": account_id['id'],
@@ -36,7 +51,8 @@ class Transaction:
                 "name": transaction['name'],
                 "amount": transaction['amount'],
                 "iso_currency_code": transaction['iso_currency_code'],
-                "category": transaction['category'][0], #I may need to change this in the future as there can be more than one from Plaid
+                "category_1": category_1_id, 
+                "category_2": 4, #THIS WILL NEED TO CHANGE LATER TO REFERENCE PREVIOUS AND CHANGE TO THE CAT2 value
                 "payment_channel": transaction['payment_channel'],
                 "pending": transaction['pending']
             }

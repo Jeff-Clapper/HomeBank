@@ -1,9 +1,10 @@
-from requests.models import Response
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models.major_category_2 import Major_Category_2
-from server import db, plaid_address
 import requests
 import json
+
+db = 'homebank'
+plaid_address = "https://sandbox.plaid.com"
 
 class Major_Category_1:
     def __init__(self,data):
@@ -18,41 +19,35 @@ class Major_Category_1:
     @staticmethod
     def update_categories():
         if not Major_Category_1.get_major_cats_1():
-            url = plaid_address+'categories/get'
+            url = plaid_address+'/categories/get'
             payload = json.dumps({})
             header = {'Content-Type': 'application/json'}
 
             resp = requests.request("POST",url,data=payload,headers=header)
             resp = resp.json()
 
-            previous_maj_cat = None
-            maj_cat_id = None
-            previous_min_cat = None
-            min_cat_id = None
+            prev_plaid_cat_id = None
 
             for category in resp['categories']:
+                curr_plaid_cat_id = category['category_id'][0:5]
                 current_maj_cat = category['hierarchy'][0]
-                if len(category['hierarchy']) == 2:
+                
+                if len(category['hierarchy']) > 1:
                     current_min_cat = category['hierarchy'][1]
+                else:
+                    current_min_cat = "None"
                 
-                if current_maj_cat != previous_maj_cat:
-                    previous_maj_cat = current_maj_cat 
-                    data = {"major_cat": current_maj_cat}
-                    maj_cat_id = Major_Category_1.update_major_cats_1(data)
-                
-                elif current_min_cat != previous_min_cat:
-                    previous_min_cat = current_min_cat
+                if curr_plaid_cat_id != prev_plaid_cat_id:
+                    prev_plaid_cat_id = curr_plaid_cat_id 
                     data = {
-                        "minor_cat": current_min_cat,
-                        "major_cat_id": maj_cat_id
-                    }
-                    min_cat_id = Major_Category_1.update_minor_cats(data)
+                        "plaid_cat_id": curr_plaid_cat_id,
+                        "major_cat": current_maj_cat,
+                        "minor_cat": current_min_cat
+                        }
+                    Major_Category_1.update_major_cats_1(data)
                 
                 else:
-                    data = {
-                        "sub_cat": category['hierarchy'][2],
-                        "min_cat_id": min_cat_id
-                    }
+                    continue
         
         if not Major_Category_2.get_major_cats_2():
             Major_Category_2.update_major_cats_2()
@@ -62,34 +57,21 @@ class Major_Category_1:
     
     @staticmethod
     def get_major_cats_1():
-        query = 'SELECT id FROM financial_groups LIMIT 1;'
+        query = 'SELECT id FROM categories_1 LIMIT 1;'
         results = connectToMySQL(db).query_db(query)
         if results:
             return True
         else:
             return False
 
-
     @staticmethod
     def update_major_cats_1(data):
-        query = 'INSERT INTO major_cats_1 (name) VALUES (%(major_cat)s);'
-        connectToMySQL(db).query_db(query,data)
-        query = 'SELECT id FROM major_cats_1 WHERE name = %(major_cat)s;'
-        result = connectToMySQL(db).query_db(query,data)
-        return result[0]['id']
-
-
-    @staticmethod
-    def update_minor_cats(data):
-        query = 'INSERT INTO minor_cats (name, major_cat_id) VALUES (%(minor_cat)s,%(major_cat_id)s);'
-        connectToMySQL(db).query_db(query,data)
-        query = 'SELECT id FROM minor_cats WHERE name = %(minor_cat)s AND major_cat_id = %(major_cat_id)s;'
-        result = connectToMySQL(db).query_db(query,data)
-        return result[0]['id']
-
-
-    @staticmethod
-    def update_sub_cats(data):
-        query = 'INSERT INTO sub_cats (name, minor_cat_id) VALUES (%(sub_cat)s,%(min_cat_id)s);'
+        query = 'INSERT INTO categories_1 (plaid_cat_id, major_cat, minor_cat) VALUES (%(plaid_cat_id)s,%(major_cat)s,%(minor_cat)s);'
         return connectToMySQL(db).query_db(query,data)
 
+    @staticmethod
+    def get_transaction_category_1_id(data):
+        query = 'SELECT ID FROM categories_1 WHERE major_cat = %(major_cat)s AND minor_cat = %(minor_cat)s'
+        results = connectToMySQL(db).query_db(query,data)
+        print(results)
+        return results[0]
