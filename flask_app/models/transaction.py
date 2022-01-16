@@ -1,9 +1,10 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models.major_category_1 import Major_Category_1
-from server import db, client_id, secret, plaid_address
+from server import db, client_id, secret, plaid_address, key
 import requests
 import json
 from datetime import date, timedelta
+from cryptography.fernet import Fernet
 
 class Transaction:
     def __init__(self,data):
@@ -14,7 +15,8 @@ class Transaction:
         self.name= data['name']
         self.amount = data['amount']
         self.iso_currency_code = data['iso_currency_code']
-        self.category = data['category']
+        self.category_1 = data['category_1']
+        self.category_2 = data['category_2']
         self.payment_channel = data['payment_channel']
         self.pending = data['pending']
         self.created_at = data['created_at']
@@ -23,7 +25,6 @@ class Transaction:
 
     @classmethod
     def initializing_transaction(cls, transactions):
-        print("starting transaction initialization")
         for transaction in transactions:
             account_id = Transaction.get_account_id({"account_id": transaction['account_id']})
             plaid_transaction_id = transaction['transaction_id']
@@ -51,8 +52,8 @@ class Transaction:
                 "name": transaction['name'],
                 "amount": transaction['amount'],
                 "iso_currency_code": transaction['iso_currency_code'],
-                "category_1": category_1_id, 
-                "category_2": 4, #THIS WILL NEED TO CHANGE LATER TO REFERENCE PREVIOUS AND CHANGE TO THE CAT2 value
+                "category_1_id": category_1_id, 
+                "category_2_id": 4, #THIS WILL NEED TO CHANGE LATER TO REFERENCE PREVIOUS AND CHANGE TO THE CAT2 value
                 "payment_channel": transaction['payment_channel'],
                 "pending": transaction['pending']
             }
@@ -77,7 +78,7 @@ class Transaction:
 
     @staticmethod
     def register_transactions(data):
-        query = "INSERT INTO transactions (account_id, plaid_transaction_id, date, name, amount, iso_currency_code, category, payment_channel, pending) VALUES (%(account_id)s, %(plaid_transaction_id)s, %(date)s, %(name)s, %(amount)s, %(iso_currency_code)s, %(category)s, %(payment_channel)s, %(pending)s)"
+        query = "INSERT INTO transactions (account_id, plaid_transaction_id, date, name, amount, iso_currency_code, category_1_id, category_2_id, payment_channel, pending) VALUES (%(account_id)s, %(plaid_transaction_id)s, %(date)s, %(name)s, %(amount)s, %(iso_currency_code)s, %(category_1_id)s, %(category_2_id)s, %(payment_channel)s, %(pending)s)"
         return connectToMySQL(db).query_db(query,data)
 
 
@@ -114,10 +115,15 @@ class Transaction:
         end_date = date.today()
         start_date = end_date.replace(year= end_date.year -1)
 
+        f_obj = Fernet(key)
+        encrypted_access_token = data['access_token']
+        decrypted_access_token = f_obj.decrypt(encrypted_access_token)
+        decrypted_access_token = decrypted_access_token.decode('utf-8')
+
         payload = json.dumps({
         "client_id": client_id,
         "secret": secret,
-        "access_token": data['access_token'],
+        "access_token": decrypted_access_token,
         "start_date": date.strftime(start_date, "%Y-%m-%d"),
         "end_date": date.strftime(end_date, "%Y-%m-%d")
         })

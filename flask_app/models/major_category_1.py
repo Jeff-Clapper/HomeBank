@@ -71,7 +71,6 @@ class Major_Category_1:
 
     @staticmethod
     def get_transaction_category_1_id(data):
-        query = 'SELECT ID FROM categories_1 WHERE major_cat = %(major_cat)s AND minor_cat = %(minor_cat)s'
+        query = 'SELECT id FROM categories_1 WHERE major_cat = %(major_cat)s AND minor_cat = %(minor_cat)s'
         results = connectToMySQL(db).query_db(query,data)
-        print(results)
-        return results[0]
+        return results[0]['id']

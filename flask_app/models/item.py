@@ -2,7 +2,10 @@ import requests
 import json
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models.bank_account import Bank_Account
-from server import db, client_id, secret, plaid_address
+from server import db, client_id, secret, plaid_address, key
+from cryptography.fernet import Fernet
+
+
 
 class Item:
     def __init__(self,data):
@@ -29,8 +32,13 @@ class Item:
 
         response = requests.request("POST", url, headers=headers, data=payload)
         results = json.loads(response.text)
+        
+        access_token = results['access_token'].encode()
+        f_obj = Fernet(key)
+        encoded_access_token = f_obj.encrypt(access_token)
+        
         data = {
-            "access_token": results['access_token'],
+            "access_token": encoded_access_token,
             "plaid_item_id": results['item_id'],
             "family_id": family_id
         }

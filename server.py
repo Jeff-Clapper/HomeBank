@@ -7,6 +7,7 @@ db = 'homebank'
 client_id = os.getenv("CLIENT_ID")
 secret = os.getenv("SECRET")
 plaid_address = "https://sandbox.plaid.com"
+key = os.getenv("ENKEY")
 
 Major_Category_1.update_categories()
 

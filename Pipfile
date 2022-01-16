@@ -10,6 +10,7 @@ python-dotenv = "==0.15.0"
 Flask = "==1.1.2"
 PyMySQL = "*"
 Flask-Bcrypt = "*"
+cryptography = "*"
 
 [dev-packages]
 

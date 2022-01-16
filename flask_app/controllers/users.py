@@ -206,7 +206,6 @@ def get_transactions(user_id):
             "start_date": start_date,
             "end_date": end_date
         }
-        print("data: ",data)
 
         family_transactions = Transaction.get_account_transactions(data)
         
