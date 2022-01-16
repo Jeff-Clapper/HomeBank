@@ -121,10 +121,12 @@ class Bank_Account:
     async def get_balance(data):
         url = f"{plaid_address}/accounts/balance/get"
 
+        decrypted_access_token = Transaction.decrypt_access_token(data['access_token'])
+
         payload = json.dumps({
         "client_id": client_id,
         "secret": secret,
-        "access_token": data['access_token']
+        "access_token": decrypted_access_token
         })
         headers = {
         'Content-Type': 'application/json'

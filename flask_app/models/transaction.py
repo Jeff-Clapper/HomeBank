@@ -92,10 +92,12 @@ class Transaction:
         start_date = start_date+offset
         end_date = date.today()
 
+        decrypted_access_token = Transaction.decrypt_access_token(data['access_token'])
+
         payload = json.dumps({
             "client_id": client_id,
             "secret": secret,
-            "access_token": data['access_token'],
+            "access_token": decrypted_access_token,
             "start_date": date.strftime(start_date, "%Y-%m-%d"),
             "end_date": date.strftime(end_date, "%Y-%m-%d")
         })
@@ -115,10 +117,7 @@ class Transaction:
         end_date = date.today()
         start_date = end_date.replace(year= end_date.year -1)
 
-        f_obj = Fernet(key)
-        encrypted_access_token = data['access_token']
-        decrypted_access_token = f_obj.decrypt(encrypted_access_token)
-        decrypted_access_token = decrypted_access_token.decode('utf-8')
+        decrypted_access_token = Transaction.decrypt_encoded_access_token(data['access_token'])
 
         payload = json.dumps({
         "client_id": client_id,
@@ -158,3 +157,17 @@ class Transaction:
             query = "SELECT transactions.* FROM families LEFT JOIN items ON families.id = items.family_id LEFT JOIN accounts ON items.id = accounts.item_id LEFT JOIN transactions ON accounts.id = transactions.account_id WHERE families.id = %(family_id)s AND transactions.date BETWEEN %(start_date)s AND %(end_date)s ORDER BY transactions.date desc;"
         return connectToMySQL(db).query_db(query,data)
 
+    @staticmethod
+    def decrypt_access_token(token):
+        token = token.encode()
+        f_obj = Fernet(key)
+        decrypted_access_token = f_obj.decrypt(token)
+        decrypted_access_token = decrypted_access_token.decode('utf-8')
+        return decrypted_access_token
+
+    @staticmethod
+    def decrypt_encoded_access_token(token):
+        f_obj = Fernet(key)
+        decrypted_access_token = f_obj.decrypt(token)
+        decrypted_access_token = decrypted_access_token.decode('utf-8')
+        return decrypted_access_token

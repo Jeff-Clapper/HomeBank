@@ -35,10 +35,10 @@ class Item:
         
         access_token = results['access_token'].encode()
         f_obj = Fernet(key)
-        encoded_access_token = f_obj.encrypt(access_token)
+        encrypted_access_token = f_obj.encrypt(access_token)
         
         data = {
-            "access_token": encoded_access_token,
+            "access_token": encrypted_access_token,
             "plaid_item_id": results['item_id'],
             "family_id": family_id
         }
