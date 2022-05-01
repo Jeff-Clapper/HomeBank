@@ -70,7 +70,7 @@
                     <div class="breadown-head-button">
                         <button type="submit" class="btn btn-outline-secondary previous">&laquo; Previous</button>
                     </div>
-                    <h1 class="breakdown-month">September</h1>
+                    <h1 class="breakdown-month">September Breakdown</h1>
                     <div class="breadown-head-button">
                         <button type="submit" class="btn btn-outline-secondary  next">Next &raquo;</button>
                     </div>
@@ -87,96 +87,100 @@
                             <img src="C:\Users\Jeff Clapper\OneDrive - Clap Nation\Desktop\test\HomeBank\flask_app\static\images\Chart.png" width="200" height="202">
                         </div>
                         <table class="table breakdown-table needs-table">
-                            <thead class="thead-dark-gray"> 
+                            <thead class="thead-hb-theme"> 
                                 <tr>
-                                    <th scope="col">Needs</th>
-                                    <th scope="col">42%</th>
+                                    <th scope="col" class='th-name-column'>Needs</th>
+                                    <th scope="col" class='th-percent-column'>42%</th>
                                 </tr>
                             </thead>
-                            <tbody class="transaction_body"></tbody>
+                            <tbody class="transaction-body"></tbody>
                             <!-- ITEMS WILL BE POPULATED HERE. THIS WILL NOT BE AN API CALL AS THIS SHOULD NOT CHANGE WHILE THE USER IS WORKING WITH THE WINDOW -->
                             <!-- SPECIAL NOTE: I COULD MAKE THIS PAGE AN API AND RESPONSIVE SO THAT WHEN THE USER SELECTS NEXT AND PREVIOUS, IT UPDATES THE DATA AND MONTH NAME -->
                                 <tr>
-                                    <td>Mortgage</td>
-                                    <td>$1608.24</td>
+                                    <td class='td-name-column'>Mortgage</td>
+                                    <td class='td-money-column'>$1608.24</td>
                                 </tr>
                                 <tr>
-                                    <td>Grocery</td>
-                                    <td>$480.26</td>
+                                    <td class='td-name-column'>Grocery</td>
+                                    <td class='td-money-column'>$480.26</td>
                                 </tr>
                                 <tr>
-                                    <td>Electric</td>
-                                    <td>$120.26</td>
+                                    <td class='td-name-column'>Electric</td>
+                                    <td class='td-money-column'>$120.26</td>
                                 </tr>
                                 <tr>
-                                    <td>Gas</td>
-                                    <td>$240.26</td>
+                                    <td class='td-name-column'>Gas</td>
+                                    <td class='td-money-column'>$240.26</td>
                                 </tr>
+                            </tbody>
                         </table>
                         <table class="table breakdown-table wants-table">
-                            <thead class="thead-dark-gray"> 
+                            <thead class="thead-hb-theme"> 
                                 <tr>
-                                    <th scope="col">Wants</th>
-                                    <th scope="col">28%</th>
+                                    <th scope="col" class='th-name-column'>Wants</th>
+                                    <th scope="col" class='th-percent-column'>28%</th>
                                 </tr>
                             </thead>
-                            <tbody class="transaction_body"></tbody>
+                            <tbody class="transaction-body">
                             <!-- ITEMS WILL BE POPULATED HERE. THIS WILL NOT BE AN API CALL AS THIS SHOULD NOT CHANGE WHILE THE USER IS WORKING WITH THE WINDOW -->
                             <!-- SPECIAL NOTE: I COULD MAKE THIS PAGE AN API AND RESPONSIVE SO THAT WHEN THE USER SELECTS NEXT AND PREVIOUS, IT UPDATES THE DATA AND MONTH NAME -->
                                 <tr>
-                                    <td>Chick-fil-a</td>
-                                    <td>$16.88</td>
+                                    <td class='td-name-column'>Chick-fil-a</td>
+                                    <td class='td-money-column'>$16.88</td>
                                 </tr>
                                 <tr>
-                                    <td>Movies</td>
-                                    <td>$98.26</td>
+                                    <td class='td-name-column'>Movies</td>
+                                    <td class='td-money-column'>$98.26</td>
                                 </tr>
                                 <tr>
-                                    <td>Donation</td>
-                                    <td>$200.00</td>
+                                    <td class='td-name-column'>Donation</td>
+                                    <td class='td-money-column'>$200.00</td>
                                 </tr>
+                            </tbody>
                         </table>
                         <table class="table breakdown-table savings-table">
-                            <thead class="thead-dark-gray"> 
+                            <thead class="thead-hb-theme"> 
                                 <tr>
-                                    <th scope="col">Savings</th>
-                                    <th scope="col">25%</th>
+                                    <th scope="col" class='th-name-column'>Savings</th>
+                                    <th scope="col" class='th-percent-column'>25%</th>
                                 </tr>
                             </thead>
-                            <tbody class="transaction_body"></tbody>
+                            <tbody class="transaction-body"></tbody>
                             <!-- ITEMS WILL BE POPULATED HERE. THIS WILL NOT BE AN API CALL AS THIS SHOULD NOT CHANGE WHILE THE USER IS WORKING WITH THE WINDOW -->
                             <!-- SPECIAL NOTE: I COULD MAKE THIS PAGE AN API AND RESPONSIVE SO THAT WHEN THE USER SELECTS NEXT AND PREVIOUS, IT UPDATES THE DATA AND MONTH NAME -->
                                 <tr>
-                                    <td>Emergency Fund</td>
-                                    <td>$1000.00</td>
+                                    <td class='td-name-column'>Emergency Fund</td>
+                                    <td class='td-money-column'>$1000.00</td>
                                 </tr>
                                 <tr>
-                                    <td>Travel Fund</td>
-                                    <td>$200.00</td>
+                                    <td class='td-name-column'>Travel Fund</td>
+                                    <td class='td-money-column'>$200.00</td>
                                 </tr>
                                 <tr>
-                                    <td>House Fund</td>
-                                    <td>$200.00</td>
+                                    <td class='td-name-column'>House Fund</td>
+                                    <td class='td-money-column'>$200.00</td>
                                 </tr>
+                            </tbody>
                         </table>
                         <table class="table breakdown-table uncategorized-table">
-                            <thead class="thead-dark-gray"> 
+                            <thead class="thead-hb-theme"> 
                                 <tr>
-                                    <th scope="col">Uncategorized</th>
-                                    <th scope="col">5%</th>
+                                    <th scope="col" class='th-name-column'>Uncategorized</th>
+                                    <th scope="col" class='th-percent-column'>5%</th>
                                 </tr>
                             </thead>
-                            <tbody class="transaction_body"></tbody>
+                            <tbody class="transaction-body"></tbody>
                             <!-- ITEMS WILL BE POPULATED HERE. THIS WILL NOT BE AN API CALL AS THIS SHOULD NOT CHANGE WHILE THE USER IS WORKING WITH THE WINDOW -->
                             <!-- SPECIAL NOTE: I COULD MAKE THIS PAGE AN API AND RESPONSIVE SO THAT WHEN THE USER SELECTS NEXT AND PREVIOUS, IT UPDATES THE DATA AND MONTH NAME -->
                                 <tr>
-                                    <td>Undefined name or unrecognized name here</td>
-                                    <td>$66.47</td>
+                                    <td class='td-name-column'>Undefined name or unrecognized name here</td>
+                                    <td class='td-money-column'>$66.47</td>
                                 </tr>
                                 <tr>
-                                    <td>Undefined name or unrecognized name here</td>
-                                    <td>$128.76</td>
+                                    <td class='td-name-column'>Undefined name or unrecognized name here</td>
+                                    <td class='td-money-column'>$128.76</td>
                                 </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -189,127 +193,132 @@
                         <!-- Below will be a forloop breaking down all of the categories -->
                         <table class="table breakdown-table category-table">
                             <!-- SPECIAL NOTE: Category table in the row above will be renamed to the category name it is displaying -->
-                            <thead class="thead-dark-gray"> 
+                            <thead class="thead-hb-theme"> 
                                 <tr>
-                                    <th scope="col">House</th>
-                                    <th scope="col">28%</th>
+                                    <th scope="col" class='th-name-column'>House</th>
+                                    <th scope="col" class='th-percent-column'>28%</th>
                                 </tr>
                             </thead>
-                            <tbody class="transaction_body"></tbody>
+                            <tbody class="transaction-body"></tbody>
                             <!-- ITEMS WILL BE POPULATED HERE. THIS WILL NOT BE AN API CALL AS THIS SHOULD NOT CHANGE WHILE THE USER IS WORKING WITH THE WINDOW -->
                             <!-- SPECIAL NOTE: I COULD MAKE THIS PAGE AN API AND RESPONSIVE SO THAT WHEN THE USER SELECTS NEXT AND PREVIOUS, IT UPDATES THE DATA AND MONTH NAME -->
                                 <tr>
-                                    <td>Mortgage</td>
-                                    <td>$1608.24</td>
+                                    <td class='td-name-column'>Mortgage</td>
+                                    <td class='td-money-column'>$1608.24</td>
                                 </tr>
                                 <tr>
-                                    <td>Water</td>
-                                    <td>$48.62</td>
+                                    <td class='td-name-column'>Water</td>
+                                    <td class='td-money-column'>$48.62</td>
                                 </tr>
                                 <tr>
-                                    <td>Electric</td>
-                                    <td>$120.26</td>
+                                    <td class='td-name-column'>Electric</td>
+                                    <td class='td-money-column'>$120.26</td>
                                 </tr>
+                            </tbody>
                         </table>
                         <table class="table breakdown-table category-table">
                             <!-- SPECIAL NOTE: Category table in the row above will be renamed to the category name it is displaying -->
-                            <thead class="thead-dark-gray"> 
+                            <thead class="thead-hb-theme"> 
                                 <tr>
-                                    <th scope="col">Entertainment</th>
-                                    <th scope="col">12%</th>
+                                    <th scope="col" class='th-name-column'>Entertainment</th>
+                                    <th scope="col" class='th-percent-column'>12%</th>
                                 </tr>
                             </thead>
-                            <tbody class="transaction_body"></tbody>
+                            <tbody class="transaction-body"></tbody>
                             <!-- ITEMS WILL BE POPULATED HERE. THIS WILL NOT BE AN API CALL AS THIS SHOULD NOT CHANGE WHILE THE USER IS WORKING WITH THE WINDOW -->
                             <!-- SPECIAL NOTE: I COULD MAKE THIS PAGE AN API AND RESPONSIVE SO THAT WHEN THE USER SELECTS NEXT AND PREVIOUS, IT UPDATES THE DATA AND MONTH NAME -->
                                 <tr>
-                                    <td>Movies</td>
-                                    <td>$98.26</td>
+                                    <td class='td-name-column'>Movies</td>
+                                    <td class='td-money-column'>$98.26</td>
                                 </tr>
                                 <tr>
-                                    <td>Internet</td>
-                                    <td>$79.99</td>
+                                    <td class='td-name-column'>Internet</td>
+                                    <td class='td-money-column'>$79.99</td>
                                 </tr>
                                 <tr>
-                                    <td>Hulu</td>
-                                    <td>$1.99</td>
+                                    <td class='td-name-column'>Hulu</td>
+                                    <td class='td-money-column'>$1.99</td>
                                 </tr>
                                 <tr>
-                                    <td>T-Mobile</td>
-                                    <td>$80.00</td>
+                                    <td class='td-name-column'>T-Mobile</td>
+                                    <td class='td-money-column'>$80.00</td>
                                 </tr>
+                            </tbody>
                         </table>
                         <table class="table breakdown-table category-table">
                             <!-- SPECIAL NOTE: Category table in the row above will be renamed to the category name it is displaying -->
-                            <thead class="thead-dark-gray"> 
+                            <thead class="thead-hb-theme"> 
                                 <tr>
-                                    <th scope="col">Travel</th>
-                                    <th scope="col">18%</th>
+                                    <th scope="col" class='th-name-column'>Travel</th>
+                                    <th scope="col" class='th-percent-column'>18%</th>
                                 </tr>
                             </thead>
-                            <tbody class="transaction_body"></tbody>
+                            <tbody class="transaction-body"></tbody>
                             <!-- ITEMS WILL BE POPULATED HERE. THIS WILL NOT BE AN API CALL AS THIS SHOULD NOT CHANGE WHILE THE USER IS WORKING WITH THE WINDOW -->
                             <!-- SPECIAL NOTE: I COULD MAKE THIS PAGE AN API AND RESPONSIVE SO THAT WHEN THE USER SELECTS NEXT AND PREVIOUS, IT UPDATES THE DATA AND MONTH NAME -->
                                 <tr>
-                                    <td>Allegient</td>
-                                    <td>$624.98</td>
+                                    <td class='td-name-column'>Allegient</td>
+                                    <td class='td-money-column'>$624.98</td>
                                 </tr>
                                 <tr>
-                                    <td>Gas</td>
-                                    <td>$240.26</td>
+                                    <td class='td-name-column'>Gas</td>
+                                    <td class='td-money-column'>$240.26</td>
                                 </tr>
                                 <tr>
-                                    <td>Hotel</td>
-                                    <td>$399.99</td>
+                                    <td class='td-name-column'>Hotel</td>
+                                    <td class='td-money-column'>$399.99</td>
                                 </tr>
+                            </tbody>
                         </table>
                         <table class="table breakdown-table category-table">
                             <!-- SPECIAL NOTE: Category table in the row above will be renamed to the category name it is displaying -->
-                            <thead class="thead-dark-gray"> 
+                            <thead class="thead-hb-theme"> 
                                 <tr>
-                                    <th scope="col">Food</th>
-                                    <th scope="col">8%</th>
+                                    <th scope="col" class='th-name-column'>Food</th>
+                                    <th scope="col" class='th-percent-column'>8%</th>
                                 </tr>
                             </thead>
-                            <tbody class="transaction_body"></tbody>
+                            <tbody class="transaction-body"></tbody>
                             <!-- ITEMS WILL BE POPULATED HERE. THIS WILL NOT BE AN API CALL AS THIS SHOULD NOT CHANGE WHILE THE USER IS WORKING WITH THE WINDOW -->
                             <!-- SPECIAL NOTE: I COULD MAKE THIS PAGE AN API AND RESPONSIVE SO THAT WHEN THE USER SELECTS NEXT AND PREVIOUS, IT UPDATES THE DATA AND MONTH NAME -->
                                 <tr>
-                                    <td>Walmart</td>
-                                    <td>$124.26</td>
+                                    <td class='td-name-column'>Walmart</td>
+                                    <td class='td-money-column'>$124.26</td>
                                 </tr>
                                 <tr>
-                                    <td>Walmart</td>
-                                    <td>$98.62</td>
+                                    <td class='td-name-column'>Walmart</td>
+                                    <td class='td-money-column'>$98.62</td>
                                 </tr>
                                 <tr>
-                                    <td>Chick-fil-a</td>
-                                    <td>$16.99</td>
+                                    <td class='td-name-column'>Chick-fil-a</td>
+                                    <td class='td-money-column'>$16.99</td>
                                 </tr>
                                 <tr>
-                                    <td>Walmart</td>
-                                    <td>$108.62</td>
+                                    <td class='td-name-column'>Walmart</td>
+                                    <td class='td-money-column'>$108.62</td>
                                 </tr>
+                            </tbody>
                         </table>
                         <table class="table breakdown-table category-table">
                             <!-- SPECIAL NOTE: Category table in the row above will be renamed to the category name it is displaying -->
-                            <thead class="thead-dark-gray"> 
+                            <thead class="thead-hb-theme"> 
                                 <tr>
-                                    <th scope="col">Uncategorized</th>
-                                    <th scope="col">5%</th>
+                                    <th scope="col" class='th-name-column'>Uncategorized</th>
+                                    <th scope="col" class='th-percent-column'>5%</th>
                                 </tr>
                             </thead>
-                            <tbody class="transaction_body"></tbody>
+                            <tbody class="transaction-body"></tbody>
                             <!-- ITEMS WILL BE POPULATED HERE. THIS WILL NOT BE AN API CALL AS THIS SHOULD NOT CHANGE WHILE THE USER IS WORKING WITH THE WINDOW -->
                             <!-- SPECIAL NOTE: I COULD MAKE THIS PAGE AN API AND RESPONSIVE SO THAT WHEN THE USER SELECTS NEXT AND PREVIOUS, IT UPDATES THE DATA AND MONTH NAME -->
                                 <tr>
-                                    <td>Undefined name or unrecognized name here</td>
-                                    <td>$66.47</td>
+                                    <td class='td-name-column'>Undefined name or unrecognized name here</td>
+                                    <td class='td-money-column'>$66.47</td>
                                 </tr>
                                 <tr>
-                                    <td>Undefined name or unrecognized name here</td>
-                                    <td>$128.76</td>
+                                    <td class='td-name-column'>Undefined name or unrecognized name here</td>
+                                    <td class='td-money-column'>$128.76</td>
                                 </tr>
+                            </tbody>
                         </table>
                     <!-- endfor -->
                     </div>
@@ -320,4 +329,6 @@
 </body>
 </html>
 
-<!-- TO DO: -->
+<!-- TO DO: 
+    Do I want to make the table outline the lightest shade of purple? (This would apply to all tables)
+-->

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet", type='text/css',  href= "{{ url_for('static', filename='css/styles.css') }}">
+    <title>Gameplan</title>
+</head> -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet", type='text/css',  href= "C:\Users\Jeff Clapper\OneDrive - Clap Nation\Desktop\test\HomeBank\flask_app\static\css\styles.css">
+    <title>Gameplan</title>
+</head>
+<body>
+    <div id="transaction-base">
+        <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #6e388a; margin-bottom: 25px;">
+            <div class='navigation' style="width: 100%;">
+                <a class="navbar-brand" href="#">
+                    <!-- <img src="{{ url_for('static', filename='images/pig-icon-small.png') }}" width="30" height="30" class="d-inline-block align-top" alt="image of pig bank with a house imprinted in the center of it"> -->
+                    <img src="C:\Users\Jeff Clapper\OneDrive - Clap Nation\Desktop\test\HomeBank\flask_app\static\images\pig-icon-small.png" width="30" height="30" class="d-inline-block align-top" alt="image of pig bank with a house imprinted in the center of it">
+                    Home Bank
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div id='navbar-content' class="collapse navbar-collapse" id="navbarSupportedContent navbarDropdown">    
+                    <ul class="navbar-nav mr-auto contents" style="display: flex; justify-content: right">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/user/{{user.id}}/home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Game Plan <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Breakdown</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/user/{{user.id}}/transactions">Transactions</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Payday</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Goals</a>
+                        </li>
+                        <li class="nav-item dropdown" >
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage Family</a>
+                            <div class="dropdown-content dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Settings</a>
+                                <a href="/user/{{user.id}}/register_bank_account" class="dropdown-item">Link Bank Account</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/logout">Sign Out</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div id='gameplan-body' class='container-fluid'>
+            <div class="gameplan-header">
+                <div class="modules gameplan-head">
+                    <div class="gameplan-head-upper">
+                        <div class="gameplan-head-button">
+                            <button type="submit" class="btn btn-outline-secondary previous">&laquo; Previous</button>
+                        </div>
+                        <h1 class="gameplan-month">September Game Plan</h1>
+                        <div class="breadown-head-button">
+                            <button type="submit" class="btn btn-outline-secondary  next">Next &raquo;</button>
+                        </div>
+                    </div>
+                    <div class="gameplan-head-lower">
+                        <div class="gameplan-head-button select-month">
+                            <button type="submit" class="btn btn-secondary">Select Month</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="gameplan-data-body">
+                <div class="module-column-left">
+                    <div class="modules gameplan">
+                        <H2 class="module-header">Budget Gameplan</H2>
+                        <table class="table gameplan-table category-table">
+                            <!-- SPECIAL NOTE: Category table in the row above will be renamed to the category name it is displaying -->
+                            <thead class="thead-dark"> 
+                                <tr>
+                                    <th scope="col" class='th-name-column'>Name</th>
+                                    <th scope="col" class='th-funds-column'>Funds</th>
+                                    <th scope="col" class='th-b3c-column'>Big 3 Class</th>
+                                </tr>
+                            </thead>
+                        </table>
+                        <!-- Below will be a forloop breaking down all of the categories -->
+                        <table class="table gameplan-table category-table">
+                            <!-- SPECIAL NOTE: Category table in the row above will be renamed to the category name it is displaying -->
+                            <thead class="thead-hb-theme"> 
+                                <tr>
+                                    <th scope="col" class='th-name-column'>House</th>
+                                    <th scope="col" class='th-funds-column'></th>
+                                    <th scope="col" class='th-b3c-column'></th>
+                                </tr>
+                            </thead>
+                            <tbody class="gameplan-table-body">
+                            <!-- ITEMS WILL BE POPULATED HERE. THIS WILL BE AN API CALL AS THISS WILL CHANGE WITH USER INTERACTION -->
+                                <tr>
+                                    <td class='td-name-column'>Mortgage</td>
+                                    <td class='td-money-column'>$1608.24</td>
+                                    <td class='.td-b3c-column'>Need</td>
+                                </tr>
+                                <tr>
+                                    <td class='td-name-column'>Water</td>
+                                    <td class='td-money-column'>$48.62</td>
+                                    <td class='.td-b3c-column'>Need</td>
+                                </tr>
+                                <tr>
+                                    <td class='td-name-column'>Electric</td>
+                                    <td class='td-money-column'>$120.26</td>
+                                    <td class='.td-b3c-column'>Need</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table gameplan-table category-table">
+                            <!-- SPECIAL NOTE: Category table in the row above will be renamed to the category name it is displaying -->
+                            <thead class="thead-hb-theme"> 
+                                <tr>
+                                    <th scope="col" class='th-name-column'>Entertainment</th>
+                                    <th scope="col" class='th-funds-column'></th>
+                                    <th scope="col" class='th-b3c-column'></th>
+                                </tr>
+                            </thead>
+                            <tbody class="gameplan-table-body">
+                            <!-- ITEMS WILL BE POPULATED HERE. THIS WILL BE AN API CALL AS THISS WILL CHANGE WITH USER INTERACTION -->
+                                <tr>
+                                    <td class='td-name-column'>Movies</td>
+                                    <td class='td-money-column'>$98.26</td>
+                                    <td class='.td-b3c-column'>Want</td>
+                                </tr>
+                                <tr>
+                                    <td class='td-name-column'>Internet</td>
+                                    <td class='td-money-column'>$79.99</td>
+                                    <td class='.td-b3c-column'>Need</td>
+                                </tr>
+                                <tr>
+                                    <td class='td-name-column'>Going Out to Eat</td>
+                                    <td class='td-money-column'>$1.99</td>
+                                    <td class='.td-b3c-column'>Want</td>
+                                </tr>
+                                <tr>
+                                    <td class='td-name-column'>Phone</td>
+                                    <td class='td-money-column'>$80.00</td>
+                                    <td class='.td-b3c-column'>Need</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table gameplan-table category-table">
+                            <!-- SPECIAL NOTE: Category table in the row above will be renamed to the category name it is displaying -->
+                            <thead class="thead-hb-theme"> 
+                                <tr>
+                                    <th scope="col" class='th-name-column'>Travel</th>
+                                    <th scope="col" class='th-funds-column'></th>
+                                    <th scope="col" class='th-b3c-column'></th>
+                                </tr>
+                            </thead>
+                            <tbody class="gameplan-table-body">
+                            <!-- ITEMS WILL BE POPULATED HERE. THIS WILL BE AN API CALL AS THISS WILL CHANGE WITH USER INTERACTION -->
+                                <tr>
+                                    <td class='td-name-column'>Vacation</td>
+                                    <td class='td-money-column'>$624.98</td>
+                                    <td class='.td-b3c-column'>Want</td>
+                                </tr>
+                                <tr>
+                                    <td class='td-name-column'>Commute</td>
+                                    <td class='td-money-column'>$240.26</td>
+                                    <td class='.td-b3c-column'>Need</td>
+                                </tr>
+                                <tr>
+                                    <td class='td-name-column'>Parking</td>
+                                    <td class='td-money-column'>$399.99</td>
+                                    <td class='.td-b3c-column'>Want</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table gameplan-table category-table">
+                            <!-- SPECIAL NOTE: Category table in the row above will be renamed to the category name it is displaying -->
+                            <thead class="thead-hb-theme"> 
+                                <tr>
+                                    <th scope="col" class='th-name-column'>Food</th>
+                                    <th scope="col" class='th-funds-column'></th>
+                                    <th scope="col" class='th-b3c-column'></th>
+                                </tr>
+                            </thead>
+                            <tbody class="gameplan-table-body">
+                            <!-- ITEMS WILL BE POPULATED HERE. THIS WILL BE AN API CALL AS THISS WILL CHANGE WITH USER INTERACTION -->
+                                <tr>
+                                    <td class='td-name-column'>Groceries</td>
+                                    <td class='td-money-column'>$124.26</td>
+                                    <td class='.td-b3c-column'>Need</td>
+                                </tr>
+                                <tr>
+                                    <td class='td-name-column'>Going Out to Eat</td>
+                                    <td class='td-money-column'>$98.62</td>
+                                    <td class='.td-b3c-column'>Need</td>
+                                </tr>
+                                <tr>
+                                    <td class='td-name-column'>Cat Food</td>
+                                    <td class='td-money-column'>$16.99</td>
+                                    <td class='.td-b3c-column'>Want</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table gameplan-table category-table">
+                            <!-- SPECIAL NOTE: Category table in the row above will be renamed to the category name it is displaying -->
+                            <thead class="thead-hb-theme"> 
+                                <tr>
+                                    <th scope="col" class='th-name-column'>Medical</th>
+                                    <th scope="col" class='th-funds-column'></th>
+                                    <th scope="col" class='th-b3c-column'></th>
+                                </tr>
+                            </thead>
+                            <tbody class="gameplan-table-body">
+                            <!-- ITEMS WILL BE POPULATED HERE. THIS WILL BE AN API CALL AS THISS WILL CHANGE WITH USER INTERACTION -->
+                                <tr>
+                                    <td class='td-name-column'>Dental</td>
+                                    <td class='td-money-column'>$66.47</td>
+                                    <td class='.td-b3c-column'>Need</td>
+                                </tr>
+                                <tr>
+                                    <td class='td-name-column'>Medication</td>
+                                    <td class='td-money-column'>$128.76</td>
+                                    <td class='.td-b3c-column'>Need</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    <!-- endfor -->
+                    </div>
+                </div>
+                <div class="module-column-right">
+                    <div class="modules gameplan-breakdown">
+                        <h4 class="module-header">Big 3<br>Breakdown</h4>
+                        <table class="table gameplan-table budget-table">
+                            <tbody class="gameplan-table-body">
+                            <!-- ITEMS WILL BE POPULATED HERE. THIS WILL BE AN API CALL AS THISS WILL CHANGE WITH USER INTERACTION -->
+                                <tr>
+                                    <td class='td-name-column'>Needs</td>
+                                    <td class='td-percent-column'>55%</td>
+                                </tr>
+                                <tr>
+                                    <td class='td-name-column'>Wants</td>
+                                    <td class='td-percent-column'>15%</td>
+                                </tr>
+                                <tr>
+                                    <td class='td-name-column'>Save</td>
+                                    <td class='td-percent-column'>20%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modules gameplan-breakdown ">
+                        <h4 class="module-header">Budget<br>Breakdown</h4>
+                        <table class="table gameplan-table budget-table">
+                            <tbody class="gameplan-table-body">
+                            <!-- ITEMS WILL BE POPULATED HERE. THIS WILL BE AN API CALL AS THIS WILL CHANGE WITH USER INTERACTION -->
+                                <tr>
+                                    <td class='td-name-column'>House</td>
+                                    <td class='td-percent-column'>30%</td>
+                                </tr>
+                                <tr>
+                                    <td class='td-name-column'>Entertainment</td>
+                                    <td class='td-percent-column'>15%</td>
+                                </tr>
+                                <tr>
+                                    <td class='td-name-column'>Travel</td>
+                                    <td class='td-percent-column'>20%</td>
+                                </tr>
+                                <tr>
+                                    <td class='td-name-column'>Food</td>
+                                    <td class='td-percent-column'>30%</td>
+                                </tr>
+                                <tr>
+                                    <td class='td-name-column'>Medical</td>
+                                    <td class='td-percent-column'>12%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<!-- TO DO: 
+    1. Make right xide (big 3 and budget breakdown scroll with the page)
+    2. Change table to be a form
+    3. Change Funds column to either be user input (must be a number)
+    4. Change Big 3 class to be a drop down menu
+    5. This page will NEED to utilize API's to make data dynamic
+-->
