@@ -256,6 +256,19 @@ h1 {
     width:100%;
 }
 
+.progress {
+    width: 90%;
+}
+
+.progress-container {
+    display: flex;
+    justify-content: center;
+}
+
+.progress-bar {
+    background-color: #6e388a59;
+}
+
 .positive {
     color: green;
 }
@@ -315,7 +328,7 @@ h1 {
     width: 48.75%;
 }
 
-.breakdown-header, .gameplan-header {
+.breakdown-header, .gameplan-header, .goal-header {
 	display:flex;
 	justify-content:center;
 }
@@ -375,14 +388,54 @@ h1 {
     width: 26%;
 }
 
-.gameplan-head {
+.gameplan-head, .goal-head {
     display: flex;
     flex-direction: column;
 }
-.gameplan-head-lower {
+
+.gameplan-head-lower, .goals-header {
     display: flex;
     justify-content: center;
 }
+
 .select-month {
     width: 20%;
 }
+
+.goals-header {
+    text-align: center;
+}
+
+.goals-modules-area {
+	width: 100%;
+}
+
+.goals-modules-area-upper, .goals-modules-area-lower {
+    display:flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.goals-history-button {
+    width: 50%;
+}
+
+.goal {
+    width: 29%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.goal-name, .goal-data, .new-goal{
+    color: #6e388a;
+}
+
+.goal-name, .goal-objective, .new-goal {
+    font-weight: bold;
+}
+
+.add-icon {
+    width: 40%;
+}
+
