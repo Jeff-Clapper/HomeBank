@@ -73,17 +73,13 @@ h1 {
     border-color: #7952b3;
 }
 
-.registrationLink, .loginLink {
+.registrationLink, .loginLink, .BoH-icon {
     display: flex;
     justify-content: center;
 }
 .user_registration, .login, .graph-header {
     color: #6e388a;
     text-decoration: none;
-}
-.BoH-icon {
-    display: flex;
-    justify-content: center;
 }
 .navbar .navbar-expand-lg .navbar-light .bg-light{
     background-color: #6e388a;
@@ -92,7 +88,7 @@ h1 {
     padding: 0px 10px;
     display: flex;
 }
-.contents {
+.contents, .previous-tables {
     display: flex;
     justify-content: space-evenly;
 }
@@ -125,7 +121,7 @@ h1 {
     display: block;
 }
 
-#home_page_body, #breakdown-body {
+#home_page_body, #breakdown-body, #payday-body {
     display: flex;
     justify-content: space-evenly;
     width: 100%;
@@ -172,29 +168,24 @@ h1 {
 
 }
 
-/* .module-body {
-    display: flex;
-    flex-direction: column;
-} */
-
 .module-items {
     margin: 0;
     padding: 0;
 }
 
 .pie-graph {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .graph-header, .goal-name {
-	text-align: center;
+    text-align: center;
 }
 
 .graph {
-	display:flex;
-	justify-content: space-evenly
+    display:flex;
+    justify-content: space-evenly
 }
 
 .select-all, .breadown-head-button, .gameplan-head-button{
@@ -210,7 +201,7 @@ h1 {
     justify-content: center;
 }
 
-.module-header, .person-header, .person-paydate {
+.module-header, .person-header, .person-paydate, .previous-date {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -303,7 +294,7 @@ h1 {
 	text-align:center;
 }
 
-.transactions-table, .breakdown-table {
+.transactions-table, .breakdown-table, .payday-table {
     border: solid lightgray 3px;
     margin: 15px 0px;
 }
@@ -313,11 +304,11 @@ h1 {
     margin: 2px 0px;
 }
 
-#breakdown-body {
+#breakdown-body, #payday-body, .previous-paydays {
     flex-direction: column;
 }
 
-.breakdown-head, .gameplan-head-upper {
+.breakdown-head, .gameplan-head-upper, .payday-header-lower {
     display:flex;
     justify-content: space-between;
 }
@@ -328,7 +319,7 @@ h1 {
     width: 48.75%;
 }
 
-.breakdown-header, .gameplan-header, .goal-header {
+.breakdown-header, .gameplan-header, .goal-header, .payday-head {
 	display:flex;
 	justify-content:center;
 }
@@ -371,12 +362,7 @@ h1 {
     width: 30%;
 }
 
-.breakdown-graph-image {
-    display: flex;
-    justify-content: center;
-}
-
-.breakdown-month, .gameplan-month {
+.breakdown-month, .gameplan-month, .payday-person, .goals-header {
     text-align: center;
 }
 
@@ -388,22 +374,18 @@ h1 {
     width: 26%;
 }
 
-.gameplan-head, .goal-head {
+.gameplan-head, .goal-head, .payday-head {
     display: flex;
     flex-direction: column;
 }
 
-.gameplan-head-lower, .goals-header {
+.gameplan-head-lower, .goals-header, .payday-header-upper, .breakdown-graph-image  {
     display: flex;
     justify-content: center;
 }
 
 .select-month {
     width: 20%;
-}
-
-.goals-header {
-    text-align: center;
 }
 
 .goals-modules-area {
@@ -439,3 +421,20 @@ h1 {
     width: 40%;
 }
 
+.user {
+    border:#6e388a 1px solid;
+    border-radius: 4px;
+    padding: 5px;
+    text-align: center;
+    color: #6e388a
+}
+
+#payday-user-select {
+    margin:5px
+}
+
+.previous-table-area {
+    margin: 10px;
+    width: 30%;
+    text-align: center;
+}
