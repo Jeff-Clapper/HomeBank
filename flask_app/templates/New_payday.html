@@ -64,135 +64,144 @@
         <div id='payday-body' class='container-fluid'>
             <div class="payday-header">
                 <div class="modules payday-head">
-                    <div class="payday-header-upper">
+                    <div class="payday-header">
                         <h1 class="payday-person">Abigail's Payday</h1>
                     </div>
-                    <div class="payday-header-lower">
-                        <div class="payday-head-button">
-                            <button type="submit" class="btn btn-secondary">Select Paydate</button>
-                        </div>
-                        <div class="payday-head-button">
-                            <button type="submit" class="btn btn-outline-secondary previous">&laquo; Previous</button>
-                        </div>
-                        <h2 class="paydate-person module-header">September 9th, 2022</h2>
-                        <div class="payday-head-button">
-                            <button type="submit" class="btn btn-outline-secondary  next">Next &raquo;</button>
-                        </div>
-                        <form id="payday-user-select">
-                            <div class="payday-user-selector">
-                                <input type="hidden" name="THIS WILL BE USERNAME" value="{{user['USERNAME VARIABLE HERE']}}">
-                                <select name="user" class="user" id="user-selector">
-                                    <option value="user">Abby</option>
-                                    {% for account in accounts: %}
-                                        <option value="{{ account.account_id }}">{{account.account_name}}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <!-- This will either need a button or I will make this an API call when value changed.  -->
-                        </form>
-                    </div>
+                    
                 </div>
             </div>
             <div class="payday-body">
                 <div class="module-column-upper">
                     <div class="modules payday">
-                        <div class="current-payday-tables">
-                            <table class="table payday-table planned-table">
-                                <thead class="thead-hb-theme"> 
-                                    <tr>
-                                        <th scope="col" class='th-account-name-column'>Planned</th>
-                                        <!-- This will need to be pulled from previous data (maybe previous paychecks) -->
-                                        <th scope="col" class='th-funds-column'>$1364.24</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="payday-body"></tbody>
-                                <!-- This will be a for loop -->
-                                <!-- This will require User input and may need to be an api call, or I may need to have the frontend do math -->
-                                    <tr>
-                                        <td class='td-name-column account-name'>Account 1</td>
-                                        <td class='td-money-column account-name-funds'>$801.13</td>
-                                    </tr>
-                                    <tr>
-                                        <td class='td-name-column account-name'>Account 2</td>
-                                        <td class='td-money-column account-name-funds'>$200.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td class='td-name-column account-name'>Account 3</td>
-                                        <td class='td-money-column account-name-funds'>$0.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td class='td-name-column account-name'>Account 4</td>
-                                        <td class='td-money-column account-name-funds'>$500.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td class='td-name-column account-name'>Account 5</td>
-                                        <td class='td-money-column account-name-funds'>$184.87</td>
-                                    </tr>
-                                    <tr>
-                                        <td class='td-name-column account-name'>Account 6</td>
-                                        <td class='td-money-column account-name-funds'>$0.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td class='td-name-column account-name'>Account 7</td>
-                                        <td class='td-money-column account-name-funds'>$20.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td class='td-name-column account-name'>Account 8</td>
-                                        <td class='td-money-column account-name-funds'>$200.00</td>
-                                    </tr>
-                                <!-- endfor -->
-                                </tbody>
-                            </table>
-                            <h4 class="planned-remaining">134.21</h4>
+                        <div class="payday-module-upper">
+                            <div class="payday-head-button">
+                                <button type="submit" class="btn btn-secondary">Select Paydate</button>
+                            </div>
+                            <div class="payday-head-button">
+                                <button type="submit" class="btn btn-outline-secondary previous">&laquo; Previous</button>
+                            </div>
+                            <h2 class="paydate-person module-header">September 9th, 2022</h2>
+                            <div class="payday-head-button">
+                                <button type="submit" class="btn btn-outline-secondary  next">Next &raquo;</button>
+                            </div>
+                            <form id="payday-user-select">
+                                <div class="payday-user-selector">
+                                    <input type="hidden" name="THIS WILL BE USERNAME" value="{{user['USERNAME VARIABLE HERE']}}">
+                                    <select name="user" class="user" id="user-selector">
+                                        <option value="user">Abby</option>
+                                        {% for account in accounts: %}
+                                            <option value="{{ account.account_id }}">{{account.account_name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <!-- This will either need a button or I will make this an API call when value changed.  -->
+                            </form>
                         </div>
                         <div class="current-payday-tables">
-                            <table class="table payday-table actual-table">
-                                <thead class="thead-hb-theme"> 
-                                    <tr>
-                                        <th scope="col" class='th-account-name-column'>Actual</th>
-                                        <!-- this will need to be pulled from the bank account -->
-                                        <th scope="col" class='th-funds-column'>$1364.24</th>
+                            <div class="current-payday-table">
+                                <table class="table payday-table planned-table">
+                                    <thead class="thead-hb-theme"> 
+                                        <tr>
+                                            <th scope="col" class='th-account-name-column'>Planned</th>
+                                            <!-- This will need to be pulled from previous data (maybe previous paychecks) -->
+                                            <th scope="col" class='th-funds-column planned-funds'>$1364.24</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="payday-body"></tbody>
+                                    <!-- This will be a for loop -->
+                                    <!-- This will require User input and may need to be an api call, or I may need to have the frontend do math -->
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 1</td>
+                                            <td class='td-money-column account-name-funds'>$801.13</td>
+                                        </tr>
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 2</td>
+                                            <td class='td-money-column account-name-funds'>$200.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 3</td>
+                                            <td class='td-money-column account-name-funds'>$0.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 4</td>
+                                            <td class='td-money-column account-name-funds'>$500.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 5</td>
+                                            <td class='td-money-column account-name-funds'>$184.87</td>
+                                        </tr>
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 6</td>
+                                            <td class='td-money-column account-name-funds'>$0.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 7</td>
+                                            <td class='td-money-column account-name-funds'>$20.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 8</td>
+                                            <td class='td-money-column account-name-funds'>$200.00</td>
+                                        </tr>
+                                    <!-- endfor -->
+                                    <tr class='thead-hb-theme'>
+                                        <td class='td-name-column account-name'>Unassigned</td>
+                                        <td class='td-money-column planned-remaining'>$134.21</td>
                                     </tr>
-                                </thead>
-                                <tbody class="payday-body"></tbody>
-                                <!-- This will be a for loop -->
-                                <!-- This will require User input and may need to be an api call, or I may need to have the frontend do math -->
-                                    <tr>
-                                        <td class='td-name-column account-name'>Account 1</td>
-                                        <td class='td-money-column account-name-funds'>$801.13</td>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="current-payday-table">
+                                <table class="table payday-table actual-table">
+                                    <thead class="thead-hb-theme"> 
+                                        <tr>
+                                            <th scope="col" class='th-account-name-column'>Actual</th>
+                                            <!-- this will need to be pulled from the bank account -->
+                                            <th scope="col" class='th-funds-column actual-funds'>$1364.24</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="payday-body"></tbody>
+                                    <!-- This will be a for loop -->
+                                    <!-- This will require User input and may need to be an api call, or I may need to have the frontend do math -->
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 1</td>
+                                            <td class='td-money-column account-name-funds'>$801.13</td>
+                                        </tr>
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 2</td>
+                                            <td class='td-money-column account-name-funds'>$200.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 3</td>
+                                            <td class='td-money-column account-name-funds'>$0.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 4</td>
+                                            <td class='td-money-column account-name-funds'>$500.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 5</td>
+                                            <td class='td-money-column account-name-funds'>$184.87</td>
+                                        </tr>
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 6</td>
+                                            <td class='td-money-column account-name-funds'>$0.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 7</td>
+                                            <td class='td-money-column account-name-funds'>$20.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 8</td>
+                                            <td class='td-money-column account-name-funds'>$200.00</td>
+                                        </tr>
+                                    <!-- endfor -->
+                                    <tr class='thead-hb-theme'>
+                                        <td class='td-name-column account-name'>Unassigned</td>
+                                        <td class='td-money-column actual-remaining'>$255.21</td>
                                     </tr>
-                                    <tr>
-                                        <td class='td-name-column account-name'>Account 2</td>
-                                        <td class='td-money-column account-name-funds'>$200.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td class='td-name-column account-name'>Account 3</td>
-                                        <td class='td-money-column account-name-funds'>$0.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td class='td-name-column account-name'>Account 4</td>
-                                        <td class='td-money-column account-name-funds'>$500.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td class='td-name-column account-name'>Account 5</td>
-                                        <td class='td-money-column account-name-funds'>$184.87</td>
-                                    </tr>
-                                    <tr>
-                                        <td class='td-name-column account-name'>Account 6</td>
-                                        <td class='td-money-column account-name-funds'>$0.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td class='td-name-column account-name'>Account 7</td>
-                                        <td class='td-money-column account-name-funds'>$20.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td class='td-name-column account-name'>Account 8</td>
-                                        <td class='td-money-column account-name-funds'>$200.00</td>
-                                    </tr>
-                                <!-- endfor -->
-                                </tbody>
-                            </table>
-                            <h4 class="planned-remaining">$134.21</h4>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -200,7 +209,17 @@
                     <div class="modules previous-paydays">
                         <div class="previous-header">
                             <h3 class="module-header">Previous 3</h3>
-                            <h4>INSERT TOGGLE BETWEEN PLANNED AND ACTUAL HERE</h4>
+                            <div class="planned-actual-toggle-buttons">
+                                <div class="payday-previous-toggle-button">
+                                    <button type="submit" class="btn btn-secondary planned">Planned</button>
+                                </div>
+                                <div class="payday-previous-toggle-button">
+                                    <button type="submit" class="btn btn-outline-secondary actual">Actual</button>
+                                </div>
+                                <div class="payday-previous-toggle-button">
+                                    <button type="submit" class="btn btn-outline-secondary OTHERPERSONNAMEHERE">Jeffery</button>
+                                </div>
+                            </div>
                         </div>
                         <div class="previous-tables">
                             <div class="previous-table-area">
@@ -353,6 +372,122 @@
                         </div>
                     </div>
                 </div>
+                <div class="module-column-lower-alt">
+                    <div class="modules payday">
+                        <div class="previous-header">
+                            <h2 class="paydate-person module-header">Jeffery's Last Planned Paycheck</h2>
+                            <div class="planned-actual-toggle-buttons">
+                                <div class="payday-previous-toggle-button">
+                                    <button type="submit" class="btn btn-outline-secondary planned">Planned</button>
+                                </div>
+                                <div class="payday-previous-toggle-button">
+                                    <button type="submit" class="btn btn-outline-secondary actual">Actual</button>
+                                </div>
+                                <div class="payday-previous-toggle-button">
+                                    <button type="submit" class="btn btn-secondary OTHERPERSONNAMEHERE">Jeffery</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="current-payday-tables">
+                            <div class="current-payday-table">
+                                <table class="table payday-table planned-table">
+                                    <thead class="thead-hb-theme"> 
+                                        <tr>
+                                            <th scope="col" class='th-account-name-column'>Planned</th>
+                                            <!-- This will need to be pulled from previous data (maybe previous paychecks) -->
+                                            <th scope="col" class='th-funds-column planned-funds'>$1364.24</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="payday-body"></tbody>
+                                    <!-- This will be a for loop -->
+                                    <!-- This will require User input and may need to be an api call, or I may need to have the frontend do math -->
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 1</td>
+                                            <td class='td-money-column account-name-funds'>$801.13</td>
+                                        </tr>
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 2</td>
+                                            <td class='td-money-column account-name-funds'>$200.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 3</td>
+                                            <td class='td-money-column account-name-funds'>$0.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 4</td>
+                                            <td class='td-money-column account-name-funds'>$500.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 5</td>
+                                            <td class='td-money-column account-name-funds'>$184.87</td>
+                                        </tr>
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 6</td>
+                                            <td class='td-money-column account-name-funds'>$0.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 7</td>
+                                            <td class='td-money-column account-name-funds'>$20.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 8</td>
+                                            <td class='td-money-column account-name-funds'>$200.00</td>
+                                        </tr>
+                                    <!-- endfor -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="current-payday-table">
+                                <table class="table payday-table actual-table">
+                                    <thead class="thead-hb-theme"> 
+                                        <tr>
+                                            <th scope="col" class='th-account-name-column'>Actual</th>
+                                            <!-- this will need to be pulled from the bank account -->
+                                            <th scope="col" class='th-funds-column actual-funds'>$1364.24</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="payday-body"></tbody>
+                                    <!-- This will be a for loop -->
+                                    <!-- This will require User input and may need to be an api call, or I may need to have the frontend do math -->
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 1</td>
+                                            <td class='td-money-column account-name-funds'>$801.13</td>
+                                        </tr>
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 2</td>
+                                            <td class='td-money-column account-name-funds'>$200.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 3</td>
+                                            <td class='td-money-column account-name-funds'>$0.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 4</td>
+                                            <td class='td-money-column account-name-funds'>$500.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 5</td>
+                                            <td class='td-money-column account-name-funds'>$184.87</td>
+                                        </tr>
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 6</td>
+                                            <td class='td-money-column account-name-funds'>$0.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 7</td>
+                                            <td class='td-money-column account-name-funds'>$20.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class='td-name-column account-name'>Account 8</td>
+                                            <td class='td-money-column account-name-funds'>$200.00</td>
+                                        </tr>
+                                    <!-- endfor -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -360,5 +495,6 @@
 </html>
 
 <!-- TO DO: 
-    
+    Do I want to make the date and the buttons for select date, previous, next, and person in the middle module?
+    Do I want to allow a scroller on the bottom to move through different date ranges?
 -->
