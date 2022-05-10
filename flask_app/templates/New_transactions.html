@@ -61,44 +61,102 @@
                 </div>
             </div>
         </nav>
-        <div class="container">
-            <div class="row justify-content-md-center transactions">
-                <h1 id="transaction-head">Transactions: </h1>
-                <form id="transactions-account-date-filter">
-                    <div class="account">
-                        <input type="hidden" name="family_id" value="{{user['family_id']}}">
-                        <label for="accounts">Account: </label>
-                        <select name="account" class="accounts" id="account_selector">
-                            <option value="all">All</option>
-                            {% for account in accounts: %}
-                                <option value="{{ account.account_id }}">{{account.account_name}}</option>
-                            {% endfor %}
-                        </select>
+        <div class="transaction-body">
+            <div class="module-column-upper">
+                <div class="modules">
+                    <h1 id="transaction-head">Accounts </h1>
+                </div>
+            </div>
+            <div class="module-column-middle">
+                <div class="modules monthly-profit-module">
+                    <h3 class=module-header>Profits By Month</h3>
+                    <div class="monthly-profit-graph-image">
+                        <img src="C:\Users\Jeff Clapper\OneDrive - Clap Nation\Desktop\test\HomeBank\flask_app\static\images\bar-graph.png" width="80%" height="202">
                     </div>
-                    <div class="start">
-                        <label for="start_date">Start Date: </label> 
-                        <input type="text" class="datepicker" id="start_date" name="start_date">
+                </div>
+            </div>
+            <!-- THE BELOW WILL BE ON SCREEN INSTEAD OF PROFITS IF A SINGLE ACCOUNT IS SELECTED -->
+            <div class="module-column-middle">
+                <div class="modules monthly-profit-module">
+                    <h3 class=module-header>Bank of America Checking Properties</h3>
+                    <div class="account-properties">
+                        <h5 class="property nickname"> Nickname: Emergancy Fund</h5>
+                        <h5 class="property purpose"> Purpose: Emergancy Fund</h5>
+                        <h5 class="property type"> Account Type: Checking</h5>
+                        <h5 class="property bank"> Bank Name: Bank of America</h5>
+                        <h5 class="property curr-balance"> Current Balance: $12,202.84</h5>
+                        <h5 class="property pending"> Pending Charges: $1,112.41</h5> 
                     </div>
-                    <div class="end">
-                        <label for="end_date">End Date: </label> 
-                        <input type="text" class="datepicker" id="end_date" name="end_date">
+                </div>
+            </div>
+            <!-- End Account Properties -->
+            <div class="module-column-lower">
+                <div class="modules transactions-module">
+                    <h3 class="module-header">Transactions</h3>
+                    <form id="transactions-account-date-filter">
+                        <div class="condensed-view-box">
+                            <label for="condensed-view"> Condnesed View</label>
+                            <input type="checkbox" name="condensed-view" id="condnesed-view">
+                        </div>
+                        <div class="start">
+                            <label for="start_date">Start Date: </label> 
+                            <input type="text" class="datepicker" id="start_date" name="start_date">
+                        </div>
+                        <div class="end">
+                            <label for="end_date">End Date: </label> 
+                            <input type="text" class="datepicker" id="end_date" name="end_date">
+                        </div>
+                        <button type="submit" class="btn btn-secondary getAccount" style="width: 100px;">Submit</button>
+                    </form>
+                    <div class="account-toggle-buttons">
+                        <div class="account-toggle-button">
+                            <button type="submit" class="btn btn-secondary all-accounts">All</button>
+                        </div>
+                        <!-- FOR LOOP going through all accounts -->
+                        <div class="account-toggle-button">
+                            <button type="submit" class="btn btn-outline-secondary ACCOUNT-NAME">Account 1</button>
+                        </div>
+                        <div class="account-toggle-button">
+                            <button type="submit" class="btn btn-outline-secondary ACCOUNT-NAME">Account 2</button>
+                        </div>
+                        <div class="account-toggle-button">
+                            <button type="submit" class="btn btn-outline-secondary ACCOUNT-NAME">Account 3</button>
+                        </div>
+                        <div class="account-toggle-button">
+                            <button type="submit" class="btn btn-outline-secondary ACCOUNT-NAME">Account 4</button>
+                        </div>
+                        <div class="account-toggle-button">
+                            <button type="submit" class="btn btn-outline-secondary ACCOUNT-NAME">Account 5</button>
+                        </div>
+                        <div class="account-toggle-button">
+                            <button type="submit" class="btn btn-outline-secondary ACCOUNT-NAME">Account 6</button>
+                        </div>
+                        <div class="account-toggle-button">
+                            <button type="submit" class="btn btn-outline-secondary ACCOUNT-NAME">Account 7</button>
+                        </div>
+                        <div class="account-toggle-button">
+                            <button type="submit" class="btn btn-outline-secondary ACCOUNT-NAME">Account 8</button>
+                        </div>
+                        <!-- endfor -->
+                        <div class="account-toggle-button">
+                            <button type="submit" class="btn btn-outline-secondary obscured">Obscured</button>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-secondary getAccount" style="width: 100px;">Submit</button>
-                </form>
-                <table class="table table-striped transactions-table">
-                    <thead class="thead-light"> 
-                        <tr>
-                            <th scope="col" hidden>ID</thscope></th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Amount</th>
-                            <th scope="col">Category</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Account</th>
-                        </tr>
-                    </thead>
-                    <tbody class="transaction_body"></tbody>
-                </table>
+                    <table class="table table-striped transactions-table">
+                        <thead class="thead-light"> 
+                            <tr>
+                                <th scope="col" hidden>ID</thscope></th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Account</th>
+                            </tr>
+                        </thead>
+                        <tbody class="transaction_body"></tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

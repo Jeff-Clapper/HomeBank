@@ -36,14 +36,6 @@ body {
     background-color: #eef1f5;
 }
 
-.transactions {
-    background-color: white;
-    padding: 25px;
-    width: fit-content;
-    border-radius: 10px;
-    box-shadow: lightgray 3px 3px;
-}
-
 h1 {
     font-size: 50pt;
     font-weight: bold;
@@ -73,7 +65,7 @@ h1 {
     border-color: #7952b3;
 }
 
-.registrationLink, .loginLink, .BoH-icon, .container, .planned-actual-toggle-buttons, .module-column-lower-alt .payday-module-upper {
+.registrationLink, .loginLink, .BoH-icon, .transaction-body, .planned-actual-toggle-buttons, .module-column-lower-alt .payday-module-upper, .account-toggle-buttons {
     display: flex;
     justify-content: center;
 }
@@ -135,7 +127,7 @@ h1 {
     display: flex;
 }
 
-.module-row, .current-payday-table, .payday{
+.module-row, .current-payday-table, .payday, .transaction-body, .transactions-module, .monthly-profit-module {
     display: flex;
     flex-direction: column;
 }
@@ -174,7 +166,7 @@ h1 {
     justify-content: center;
 }
 
-.graph-header, .goal-name, .current-payday-table {
+.graph-header, .goal-name, .current-payday-table, .account-properties {
     text-align: center;
 }
 
@@ -190,7 +182,7 @@ h1 {
     width: 10%;
 }
 
-.home-page-accounts, .goals {
+.home-page-accounts, .goals, .account-properties {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -319,7 +311,7 @@ h1 {
 	justify-content:center;
 }
 
-.breakdown-data-body,.gameplan-data-body,  .payday-body .module-column-upper, .payday-body .module-column-lower,  .payday-body .module-column-lower-alt{
+.breakdown-data-body,.gameplan-data-body,  .payday-body .module-column-upper, .payday-body .module-column-lower,  .payday-body .module-column-lower-alt, .transaction-body .module-column-upper, .transaction-body .module-column-middle, .transaction-body .module-column-lower {
     display: flex;
     justify-content: center;
     width: 100%
@@ -374,7 +366,7 @@ h1 {
     flex-direction: column;
 }
 
-.gameplan-head-lower, .goals-header, .payday-header, .breakdown-graph-image  {
+.gameplan-head-lower, .goals-header, .payday-header, .breakdown-graph-image, .monthly-profit-graph-image {
     display: flex;
     justify-content: center;
 }
@@ -392,7 +384,7 @@ h1 {
     justify-content: space-evenly;
     flex-wrap: wrap;
 }
-
+ery
 .goals-history-button {
     width: 50%;
 }
@@ -432,4 +424,16 @@ h1 {
     margin: 10px;
     width: 30%;
     text-align: center;
+}
+.transactions-module .module-header, .monthly-profit-module .module-header {
+    font-size: 40px;
+}
+
+.account-toggle-buttons {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.property {
+    width: 40%;
 }
