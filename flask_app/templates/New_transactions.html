@@ -5,16 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='jquery-ui-1.13.0/jquery-ui.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='jquery-ui-1.13.0/jquery-ui.structure.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='jquery-ui-1.13.0/jquery-ui.theme.css') }}">
     <link rel="stylesheet", type='text/css',  href= "{{ url_for('static', filename='css/styles.css') }}">
-    <title>Transactions</title>
+    <title>HB Transactions</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='jquery-ui-1.13.0/jquery-ui.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/transactions.js') }}"></script>
+    <script type="text/javascript">
+        var user_id = "{{user.id}}"
+    </script>
 </head> -->
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="C:\Users\Jeff Clapper\OneDrive - Clap Nation\Desktop\test\HomeBank\flask_app\static\jquery-ui-1.13.0\jquery-ui.css">
+    <link rel="stylesheet" href="C:\Users\Jeff Clapper\OneDrive - Clap Nation\Desktop\test\HomeBank\flask_app\static\jquery-ui-1.13.0\jquery-ui.structure.css">
+    <link rel="stylesheet" href="C:\Users\Jeff Clapper\OneDrive - Clap Nation\Desktop\test\HomeBank\flask_app\staticjquery-ui-1.13.0\jquery-ui.theme.css">
     <link rel="stylesheet", type='text/css',  href= "C:\Users\Jeff Clapper\OneDrive - Clap Nation\Desktop\test\HomeBank\flask_app\static\css\styles.css">
     <title>Transactions</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="C:\Users\Jeff Clapper\OneDrive - Clap Nation\Desktop\test\HomeBank\flask_app\static\jquery-ui-1.13.0\jquery-ui.js"></script>
+    <script type="text/javascript" src="C:\Users\Jeff Clapper\OneDrive - Clap Nation\Desktop\test\HomeBank\flask_app\static\js\transactions.js"></script>
+    <script type="text/javascript">
+        var user_id = 1
+    </script>
 </head>
 <body>
     <div id="transaction-base">
@@ -67,29 +85,9 @@
                     <h1 id="transaction-head">Accounts </h1>
                 </div>
             </div>
-            <div class="module-column-middle">
-                <div class="modules monthly-profit-module">
-                    <h3 class=module-header>Profits By Month</h3>
-                    <div class="monthly-profit-graph-image">
-                        <img src="C:\Users\Jeff Clapper\OneDrive - Clap Nation\Desktop\test\HomeBank\flask_app\static\images\bar-graph.png" width="80%" height="202">
-                    </div>
-                </div>
-            </div>
-            <!-- THE BELOW WILL BE ON SCREEN INSTEAD OF PROFITS IF A SINGLE ACCOUNT IS SELECTED -->
-            <div class="module-column-middle">
-                <div class="modules monthly-profit-module">
-                    <h3 class=module-header>Bank of America Checking Properties</h3>
-                    <div class="account-properties">
-                        <h5 class="property nickname"> Nickname: Emergancy Fund</h5>
-                        <h5 class="property purpose"> Purpose: Emergancy Fund</h5>
-                        <h5 class="property type"> Account Type: Checking</h5>
-                        <h5 class="property bank"> Bank Name: Bank of America</h5>
-                        <h5 class="property curr-balance"> Current Balance: $12,202.84</h5>
-                        <h5 class="property pending"> Pending Charges: $1,112.41</h5> 
-                    </div>
-                </div>
-            </div>
-            <!-- End Account Properties -->
+
+            <div class="module-column-middle"></div>
+
             <div class="module-column-lower">
                 <div class="modules transactions-module">
                     <h3 class="module-header">Transactions</h3>
@@ -110,36 +108,36 @@
                     </form>
                     <div class="account-toggle-buttons">
                         <div class="account-toggle-button">
-                            <button type="submit" class="btn btn-secondary all-accounts">All</button>
+                            <button type="submit" class="btn btn-secondary all-accounts selected">All</button>
                         </div>
                         <!-- FOR LOOP going through all accounts -->
                         <div class="account-toggle-button">
-                            <button type="submit" class="btn btn-outline-secondary ACCOUNT-NAME">Account 1</button>
+                            <button type="submit" class="btn btn-outline-secondary account1">Account 1</button>
                         </div>
                         <div class="account-toggle-button">
-                            <button type="submit" class="btn btn-outline-secondary ACCOUNT-NAME">Account 2</button>
+                            <button type="submit" class="btn btn-outline-secondary account2">Account 2</button>
                         </div>
                         <div class="account-toggle-button">
-                            <button type="submit" class="btn btn-outline-secondary ACCOUNT-NAME">Account 3</button>
+                            <button type="submit" class="btn btn-outline-secondary account3">Account 3</button>
                         </div>
                         <div class="account-toggle-button">
-                            <button type="submit" class="btn btn-outline-secondary ACCOUNT-NAME">Account 4</button>
+                            <button type="submit" class="btn btn-outline-secondary account4">Account 4</button>
                         </div>
                         <div class="account-toggle-button">
-                            <button type="submit" class="btn btn-outline-secondary ACCOUNT-NAME">Account 5</button>
+                            <button type="submit" class="btn btn-outline-secondary account5">Account 5</button>
                         </div>
                         <div class="account-toggle-button">
-                            <button type="submit" class="btn btn-outline-secondary ACCOUNT-NAME">Account 6</button>
+                            <button type="submit" class="btn btn-outline-secondary account6">Account 6</button>
                         </div>
                         <div class="account-toggle-button">
-                            <button type="submit" class="btn btn-outline-secondary ACCOUNT-NAME">Account 7</button>
+                            <button type="submit" class="btn btn-outline-secondary account7">Account 7</button>
                         </div>
                         <div class="account-toggle-button">
-                            <button type="submit" class="btn btn-outline-secondary ACCOUNT-NAME">Account 8</button>
+                            <button type="submit" class="btn btn-outline-secondary account8">Account 8</button>
                         </div>
                         <!-- endfor -->
                         <div class="account-toggle-button">
-                            <button type="submit" class="btn btn-outline-secondary obscured">Obscured</button>
+                            <button type="submit" class="btn btn-outline-secondary obscured" selected="0">Obscured</button>
                         </div>
                     </div>
                     <table class="table table-striped transactions-table">
@@ -162,3 +160,9 @@
     </div>
 </body>
 </html>
+
+<!-- TO DO:
+    1. I will need to adjust the table headers to include all columns added to the MySQL database
+    2. Change the checkbox object to hide and condensed all columns but the ID
+    3. Make each row of the table an A link to pull up a module to view all details and change some of a transactio
+-->

@@ -311,7 +311,7 @@ h1 {
 	justify-content:center;
 }
 
-.breakdown-data-body,.gameplan-data-body,  .payday-body .module-column-upper, .payday-body .module-column-lower,  .payday-body .module-column-lower-alt, .transaction-body .module-column-upper, .transaction-body .module-column-middle, .transaction-body .module-column-lower {
+.breakdown-data-body,.gameplan-data-body,  .payday-body .module-column-upper, .payday-body .module-column-lower, .transaction-body .module-column-upper, .transaction-body .module-column-middle, .transaction-body .module-column-lower {
     display: flex;
     justify-content: center;
     width: 100%
