@@ -8,10 +8,10 @@ var previousPlannedModule = `
                 <button type="submit" class="btn btn-secondary selected planned">Planned</button>
             </div>
             <div class="payday-previous-toggle-button">
-                <button type="submit" class="btn btn-outline-secondary actual">Actual</button>
+                <button type="submit" class="btn btn-outline-secondary not-selected actual">Actual</button>
             </div>
             <div class="payday-previous-toggle-button">
-                <button type="submit" class="btn btn-outline-secondary OTHERPERSONNAMEHERE">Jeffery</button>
+                <button type="submit" class="btn btn-outline-secondary not-selected OTHERPERSONNAMEHERE">Jeffery</button>
             </div>
         </div>
     </div>
@@ -52,10 +52,10 @@ var otherUsersPlannedActualModule = `
         <h2 class="paydate-person module-header">Jeffery's Last Planned Paycheck</h2>
         <div class="planned-actual-toggle-buttons">
             <div class="payday-previous-toggle-button">
-                <button type="submit" class="btn btn-outline-secondary planned">Planned</button>
+                <button type="submit" class="btn btn-outline-secondary not-selected planned">Planned</button>
             </div>
             <div class="payday-previous-toggle-button">
-                <button type="submit" class="btn btn-outline-secondary actual">Actual</button>
+                <button type="submit" class="btn btn-outline-secondary not-selected actual">Actual</button>
             </div>
             <div class="payday-previous-toggle-button">
                 <button type="submit" class="btn btn-secondary selected OTHERPERSONNAMEHERE">Jeffery</button>
@@ -140,8 +140,8 @@ function setBottomModuleToOtherUser() {
 }
 
 function attachAccountToggleClickListener(){
-    $(".btn-outline-secondary").off();
-    $(".btn-outline-secondary").on("click", function(){
+    $(".not-selected").off();
+    $(".not-selected").on("click", function(){
         var unselected = $(".selected");
         toggleFromButton(unselected);
         toggleToButton(this);
@@ -151,6 +151,7 @@ function attachAccountToggleClickListener(){
 
 function toggleToButton(toButton){
     $(toButton).removeClass("btn-outline-secondary");
+    $(toButton).removeClass("not-selected")
     $(toButton).addClass("btn-secondary");
     $(toButton).addClass("selected");
 }
@@ -159,6 +160,7 @@ function toggleFromButton(toBeUnselected) {
     $(toBeUnselected).removeClass("btn-secondary");
     $(toBeUnselected).removeClass("selected");
     $(toBeUnselected).addClass("btn-outline-secondary");
+    $(toBeUnselected).addClass("not-selected")
     // attachAccountToggleClickListener();
 }
 

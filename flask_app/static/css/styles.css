@@ -13,7 +13,7 @@
 body {
     background-color: #eef1f5;
 }
-#base {
+#base, .checkbox-container {
     margin: auto 0px;
     display: flex;
     justify-content: center;
@@ -65,7 +65,7 @@ h1 {
     border-color: #7952b3;
 }
 
-.registrationLink, .loginLink, .BoH-icon, .transaction-body, .planned-actual-toggle-buttons, .module-column-lower-alt .payday-module-upper, .account-toggle-buttons {
+.registrationLink, .loginLink, .BoH-icon, .transaction-body, .planned-actual-toggle-buttons, .module-column-lower-alt .payday-module-upper, .account-toggle-buttons, .checkbox-container {
     display: flex;
     justify-content: center;
 }
@@ -152,7 +152,6 @@ h1 {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px dotted lightgray
-
 }
 
 .module-items {
@@ -188,14 +187,14 @@ h1 {
     justify-content: center;
 }
 
-.module-header, .person-header, .person-paydate, .previous-date {
+.module-header, .person-header, .person-paydate, .previous-date, .modal-header {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     color: #6e388a;
 }
 
-.module-header, .person-paydate {
+.module-header, .person-paydate, .modal-head {
     font-weight: bold;
 }
 
@@ -230,7 +229,7 @@ h1 {
     text-align: center;
 }
 
-.gameplan-breakdown {
+.gameplan-breakdown, .accociated-account {
     width:100%;
 }
 
@@ -366,7 +365,7 @@ h1 {
     flex-direction: column;
 }
 
-.gameplan-head-lower, .goals-header, .payday-header, .breakdown-graph-image, .monthly-profit-graph-image {
+.gameplan-head-lower, .goals-header, .payday-header, .breakdown-graph-image, .monthly-profit-graph-image, .checkbox {
     display: flex;
     justify-content: center;
 }
@@ -396,7 +395,7 @@ ery
     text-align: center;
 }
 
-.goal-name, .goal-data, .new-goal{
+.goal-name, .goal-data, .new-goal, .modal-head {
     color: #6e388a;
 }
 
@@ -436,4 +435,9 @@ ery
 
 .property {
     width: 40%;
+}
+
+.create-goal-checkbox-text {
+	padding-left: 10px;
+	margin:0;
 }
