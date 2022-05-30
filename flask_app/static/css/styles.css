@@ -80,7 +80,7 @@ h1 {
     padding: 0px 10px;
     display: flex;
 }
-.contents, .previous-tables, .current-payday-tables{
+.contents, .previous-tables, .current-payday-tables, .progress-bar-stats {
     display: flex;
     justify-content: space-evenly;
 }
@@ -320,7 +320,7 @@ h1 {
     background-color: #9e9e9e; 
     color:white
 }
-.thead-hb-theme {
+.thead-hb-theme{
     background-color: #6e388a;
     color:white;
     font-weight: bold;
@@ -437,7 +437,7 @@ ery
     width: 40%;
 }
 
-.create-goal-checkbox-text {
+.create-goal-checkbox-text, .close-out-goal-checkbox-text {
     padding-left: 10px;
     margin:0;
 }
@@ -470,4 +470,16 @@ ery
     position: absolute;
     top:0%;
     left: 0%;
+}
+
+.progress-bar-stats {
+    background-color: #6e388a;
+    color:white;
+    width: 150px;
+    border-radius: 3px;
+    position: absolute;
+}
+
+.progress-bar-stats p {
+    margin: 2px;
 }

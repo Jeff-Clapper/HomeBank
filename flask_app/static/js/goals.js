@@ -15,7 +15,7 @@ var goalModule =  `
 </div>`
 
 var newGoalModal = `
-<div class="new-goal-modal" id="new-goal-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="new-goal-modal active-modal" id="new-goal-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -61,7 +61,7 @@ var newGoalModal = `
 </div>`
 
 var currGoalDetailsModal = `
-<div class="existing-goal-modal" id="existing-goal-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="existing-goal-modal active-modal" id="existing-goal-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -91,7 +91,7 @@ var currGoalDetailsModal = `
 </div>`
 
 var currGoalEditModal = `
-<div class="existing-goal-modal-update" id="existing-goal-modal-updates" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="existing-goal-modal-update active-modal" id="existing-goal-modal-updates" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -126,8 +126,14 @@ var currGoalEditModal = `
                         </div>
                         <h6 class="create-goal-checkbox-text">Suggest Monthly Contribution</h6>
                     </div>
+                    <div class="user_input checkbox">
+                        <div class="checkbox-container">
+                            <input type="checkbox" class="close-out-goal" id="close-out-goal" name='close-out-goal'>
+                        </div>
+                        <h6 class="close-out-goal-checkbox-text">Close Out Goal</h6>
+                    </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary close" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-outline-secondary cancel" data-bs-dismiss="modal">Cancel</button>
                         <button type="submit" class="btn btn-secondary submit">Submit</button>
                     </div>
                 </div>
@@ -137,6 +143,12 @@ var currGoalEditModal = `
 </div>`
 
 var overlay = '<div id="overlay"></div>'
+
+var progressBarStats = `
+    <div class="progress-bar-stats">
+        <p class="percentage">75%</p>
+        <p class="current-goal-funds">$15,000</p>
+    </div>` 
 
 function moduleClickAction(){
     $(".goal").on("click",function(){
@@ -161,15 +173,48 @@ function activateModal(module){
         $(".goals-modules-area").after(newGoalModal)
     }
     else{
-        $(".goals-modules-area").after(currGoalDetailsModal)
+        $(".goals-modules-area").after(currGoalDetailsModal);
+        progressbarPercentageHoverActivation();
+        $(".edit").on("click",function(){
+            $(".active-modal").remove();
+            $(".goals-modules-area").after(currGoalEditModal);
+            $(".cancel").on("click",function(){
+                $(".active-modal").remove();
+                $(".goals-modules-area").after(currGoalDetailsModal);
+                activateCloseButton();
+            })
+        })
     };
+    activateCloseButton();
+}
+
+function activateCloseButton(){
+    $(".close").on("click",function(){
+        closeModal();
+    })
+}
+
+function progressbarPercentageHoverActivation() {
+    $(".progress").hover(function(event){
+        var xCoord = event.pageX;
+        var yCoord = event.pageY;
+        $(".modal-header").after(progressBarStats);
+        // $(".progress-bar-stats").css("top",yCoord);
+        // $(".progress-bar-stats").css("left",xCoord);
+    }, function() {
+        $(".progress-bar-stats").remove();
+    })
+}
+
+function closeModal(){
+    $(".active-modal").remove();
+    $("#overlay").remove();
 }
 
 function addOverlay(){
     $("#transaction-base").before(overlay);
-    $("#transaction-base").on("click",funtion(){
-        console.log("hello world")
-        // SOMETHING WRONG HERE!
+    $("#overlay").on("click",function(){
+        closeModal();
     })
 }
 
