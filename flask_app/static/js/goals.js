@@ -1,5 +1,3 @@
-var valuePlaceHolder = 3
-
 var goalModule =  `
 <div class="modules goal">
     <h3 class="goal-name">Goal Name</h3>
@@ -149,6 +147,8 @@ var progressBarStats = `
         <p class="percentage">75%</p>
         <p class="current-goal-funds">$15,000</p>
     </div>` 
+
+    var valuePlaceHolder = 3
 
 function moduleClickAction(){
     $(".goal").on("click",function(){

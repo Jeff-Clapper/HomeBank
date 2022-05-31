@@ -159,13 +159,13 @@ h1 {
     padding: 0;
 }
 
-.pie-graph, .goal-body {
+.pie-graph, .goal-body, .account {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.graph-header, .goal-name, .current-payday-table, .account-properties, .goal-body {
+.graph-header, .goal-name, .current-payday-table, .account-properties, .goal-body, .account {
     text-align: center;
 }
 
@@ -199,8 +199,12 @@ h1 {
 }
 
 .account {
-	width: 22%;
-	margin: 1%;
+    width: 22%;
+    margin: 1%;
+    background-color: #f7f9fa;
+    border-radius: 5px;
+    padding: 6px 12px;
+    min-width: 159.19px;
 }
 
 .link-account-button {
