@@ -70,7 +70,7 @@ var currGoalDetailsModal = `
             <div class="modal-body goal-body">
                 <h3 class="goal-objective goal-breakdown-data">$20,000</h3>
                 <h5 class="goal-data goal-account goal-breakdown-data">Account: Emergency Fund</h5>
-                <div class="progress-container goal-breakdown-data">
+                <div class="progress-container goal-breakdown-data modal-progress-container">
                     <div class="progress goal-breakdown-data">
                         <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
@@ -196,11 +196,19 @@ function activateCloseButton(){
 
 function progressbarPercentageHoverActivation() {
     $(".progress").hover(function(event){
-        var xCoord = event.pageX;
-        var yCoord = event.pageY;
-        $(".modal-header").after(progressBarStats);
-        // $(".progress-bar-stats").css("top",yCoord);
-        // $(".progress-bar-stats").css("left",xCoord);
+        // THE COMMENTED OUT SECTION DID NOT WORK, IT WOULD HAVE WORKED ON ANYTHING NOT MY MODAL. I AM KEEPING THIS FOR FUTURE STUDY
+        // var xCoord = event.pageX;
+        // var yCoord = event.pageY;
+        // var modalCoords = $(".active-modal").offset()
+        // xCoord -= modalCoords.left
+        // yCoord -= modalCoords.top
+        // // console.log("modal-top: ",modalCoords.top)
+        // // console.log("modal-left: ",modalCoords.left)
+        // console.log("xCoord: ",xCoord)
+        // console.log("yCoord: ",yCoord)
+        $(".modal-progress-container").after(progressBarStats);
+        $(".progress-bar-stats").css("top","35%");
+        $(".progress-bar-stats").css("left","95%");
     }, function() {
         $(".progress-bar-stats").remove();
     })
