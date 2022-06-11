@@ -73,7 +73,7 @@
         <div id='home_page_body' class='container-fluid'>
             <div class="module-column-left">
                 <div class="module-area">
-                    <div class="select-all">
+                    <div class="to-button" to="www.gameplan.com">
                         <button type="submit" class="btn btn-secondary">Game Plan</button>
                     </div>
                     <div class="modules spending-breakdown">
@@ -91,12 +91,13 @@
                     </div>
                 </div>
                 <div class="module-area">
-                    <div class="select-all">
+                    <div class="to-button" to="www.allaccounts.com">
                         <button type="submit" class="btn btn-secondary">Select All</button>
                     </div>
                     <div class="modules accounting-data">
                         <H2 class='module-header'>Accounts</H2>
 
+                        <!-- KEEPING THIS AS REFERENCE FOR WHEN I REWORK THE MODULES WITH ACTUAL DATA -->
                         <!-- <div class='module-body'>
                             {% if user.bank_accounts: %}
                                 {% for account in user.bank_accounts: %}
@@ -116,13 +117,16 @@
                         
 
                         <div class="home-page-accounts"></div>
-                        <div class="link-account-button">
+                        <div class="to-button link-account-button" to="www.linkbankaccount.com">
                             <button type="submit" class="btn btn-secondary">Link Bank Account</button>
                         </div>
                     </div>
                 </div>
                 <div class="module-area">
-                    <div class="select-all"></div>
+                    <!-- The select all box is just a place holder to maintain spacing
+                    I believe I did this as I decided to remove a button and creating a spacing div would
+                    have been too much work at the time. Can correct this later -->
+                    <div class="to-button"></div>
                     <div class="modules goals-data">
                         <H2 class='module-header'>Goals</H2>
                         <div class='goals'></div>

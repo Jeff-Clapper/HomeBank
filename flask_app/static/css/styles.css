@@ -174,7 +174,7 @@ h1 {
     justify-content: space-evenly
 }
 
-.select-all, .breadown-head-button, .gameplan-head-button{
+.to-button, .breadown-head-button, .gameplan-head-button{
     display: flex;
     align-items: center;
     margin-right: 10px;

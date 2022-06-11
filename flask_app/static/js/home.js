@@ -26,12 +26,85 @@ var goalPlaceHolder = 6
 var accountPlaceHolder = 7
 var personPlaceHolder = 2
 
-// NOTES FOR LATER:
-// when inserting the modules, I will be using the jQuery ".append()" 
-// accountModule gets appended to .home-page-accounts
-// goalModule gets appened to .goals
-// personPaydayModule gets appended to .module-column-right
+function populateAccounts(){
+    for(var i = 0; i < accountPlaceHolder; i++){
+        $(".home-page-accounts").append(accountModule)
+    };
+    accountHoverActivation();
+}
+
+function populateGoals(){
+    for(var i = 0; i < goalPlaceHolder; i++){
+        $(".goals").append(goalModule)
+    };
+    goalHoverActivation()
+}
+
+function populatePaydays(){
+    for(var i = 0; i < personPlaceHolder; i++){
+        $(".module-column-right").append(personPaydayModule)
+    };
+    paydayHoverActivation();
+}
+
+function hoverAction(module){
+    $(module).css("border", "3px solid #6e388a59");
+}
+
+function accountHoverActivation(){
+    $(".account").hover(function(){
+        hoverAction(this);
+        $(this).css("padding","3px 9px")
+        $(this).on("click",function(){
+            console.log("This will link to the accounts page, specifically this account")
+        })
+    },
+    function(){
+        $(this).removeAttr("style");
+        $(".account").off();
+        accountHoverActivation();
+    });
+}
+
+function paydayHoverActivation(){
+    $(".person").hover(function(){
+        hoverAction(this);
+        $(this).css("padding","17px");
+        $(this).on("click",function(){
+            console.log("this will link to the payday of this specific person")
+        });
+    },
+    function(){
+        $(this).removeAttr("style");
+        $(".person").off();
+        paydayHoverActivation();
+    });
+    }
+
+function goalHoverActivation(){
+    $(".goals-data").hover(function(){
+        hoverAction(this);
+        $(this).css("padding","17px");
+        $(this).on("click",function(){
+            console.log("This will link to the goals for this family")
+        })
+    },function(){
+        $(this).removeAttr("style");
+        $(".goals-data").off();
+        goalHoverActivation();
+    })
+}
+
+function toButtonActivation(){
+    $('.to-button').on("click",function(){
+        var linkTo = $(this).attr("to");
+        console.log("this button is working. Going to ",linkTo);
+    })
+}
 
 $(document).ready(function(){
-
+    populateAccounts();
+    populateGoals();
+    populatePaydays();
+    toButtonActivation();
 })
